@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>OnlineShop - Commande</title>
+</head>
+<body>
+<header>
+  <a href="index.html">
+    <img src="assets/img/logo.svg" alt="[LOGO]">
+  </a>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="products.html">Produits</a>
+    <a href="contact.html">Contact</a>
+    <a href="shopping-cart.html">Panier</a>
+  </nav>
+</header>
+<main>
+  <h1>Commande</h1>
+  <form action="confirmation.html" method="post">
+    <section>
+      <h3>Contact</h3>
+      <p>
+        <label for="firstname">Prénom</label>
+        <input type="text" name="firstname" id="firstname" required>
+      </p>
+      <p>
+        <label for="lastname">Nom</label>
+        <input type="text" name="lastname" id="lastname" required>
+      </p>
+      <p>
+        <label for="email">Adresse courriel</label>
+        <input type="email" name="email" id="email" required>
+      </p>
+      <p>
+        <label for="phone">Téléphone</label>
+        <input type="tel" name="phone" id="phone" required pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$">
+      </p>
+    </section>
+    <section>
+      <h3>Paiement</h3>
+      <p>
+        <label for="credit-card">Numéro de carte de crédit</label>
+        <input type="text" name="credit-card" id="credit-card" required pattern="^[0-9]{13,16}$">
+      </p>
+      <p>
+        <label for="credit-card-expiry">Date d’expiration de la carte</label>
+        <input type="month" name="credit-card-expiry" id="credit-card-expiry" required>
+      </p>
+    </section>
+    <p>
+      <input type="submit" value="Payer">
+    </p>
+  </form>
+</main>
+<footer>
+  Nicolas de Chevigné (1916313)
+</footer>
+</body>
+</html>
