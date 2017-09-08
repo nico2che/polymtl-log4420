@@ -46,7 +46,8 @@
       </p>
       <p>
         <label for="credit-card-expiry">Date d’expiration de la carte</label>
-        <input type="month" name="credit-card-expiry" id="credit-card-expiry" required>
+        <!-- placeholder & pattern MM/YYYY if month type is not supported -->
+        <input type="month" name="credit-card-expiry" id="credit-card-expiry" required placeholder="MM/YYYY" pattern="^(0[1-9]|1[0-2])/20[0-9]{2}$">
       </p>
     </section>
     <p>
