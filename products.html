@@ -3,89 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <title>OnlineShop - Produits</title>
+  <link rel="stylesheet" type="text/css"
+  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 </head>
 <body>
-<header>
-  <a href="index.html">
-    <img src="assets/img/logo.svg" alt="Logo">
-  </a>
-  <nav>
-    <a href="index.html">Accueil</a>
-    <a href="products.html">Produits</a>
-    <a href="contact.html">Contact</a>
-    <a href="shopping-cart.html">Panier</a>
-  </nav>
-</header>
-<main>
-  <section>
+  <header>
+    <a href="index.html">
+      <img src="assets/img/logo.svg" alt="Logo">
+    </a>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="products.html">Produits</a>
+      <a href="contact.html">Contact</a>
+      <a href="shopping-cart.html">Panier</a>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <!-- Après avoir demandé au chargé, il m'a confirmé qu'il fallait utiliser div et buttun ici -->
       <h3>Catégories</h3>
-      <ul id="product-categories">
-        <li>Appareils photo</li>
-        <li>Consoles</li>
-        <li>Écrans</li>
-        <li>Ordinateurs</li>
-        <li>Tous les produits</li>
-      </ul>
+      <div id="product-categories"> 
+        <button>Appareils photo</button>
+        <button>Consoles</button>
+        <button>Écrans</button>
+        <button>Ordinateurs</button>
+        <button>Tous les produits</button>
+      </div>
       <h3>Classement</h3>
-      <ul id="product-criteria">
-        <li>Prix (bas-haut)</li>
-        <li>Prix (haut-bas)</li>
-        <li>Nom (A-Z)</li>
-        <li>Nom (Z-A)</li>
-      </ul>
-  </section>
-  <section id="products-list">
-    <h1>Produits</h1>
-    <p>6 produits</p>
-    <!-- <div> to display flex articles -->
-    <div>
-      <article>
-        <a href="product.html">
-          <h3>Apple TV</h3>
-          <img src="assets/img/apple-tv.png" alt="">
-          <p>249.99$</p>
-        </a>
-      </article>
-      <article>
-        <a href="product.html">
-          <h3>Canon EOS 5D Mark II</h3>
-          <img src="assets/img/camera-1.png" alt="">
-          <p>2999.99$</p>
-        </a>
-      </article>
-      <article>
-        <a href="product.html">
-          <h3>Nikon D7000</h3>
-          <img src="assets/img/camera-2.png" alt="">
-          <p>549.99$</p>
-        </a>
-      </article>
-      <article>
-        <a href="product.html">
-          <h3>Canon PowerShot SD1300</h3>
-          <img src="assets/img/camera-3.png" alt="">
-          <p>299.99$</p>
-        </a>
-      </article>
-      <article>
-        <a href="product.html">
-          <h3>Portable</h3>
-          <img src="assets/img/laptop-1.png" alt="">
-          <p>699.99$</p>
-        </a>
-      </article>
-      <article>
-        <a href="product.html">
-          <h3>iMac 27"</h3>
-          <img src="assets/img/mac.png" alt="">
-          <p>2299.99$</p>
-        </a>
-      </article>
-    </div>
-  </section>
-</main>
-<footer>
-  Nicolas de Chevigné (1916313)
-</footer>
+      <div id="product-criteria">
+        <button>Prix (bas-haut)</button>
+        <button>Prix (haut-bas)</button>
+        <button>Nom (A-Z)</button>
+        <button>Nom (Z-A)</button>
+      </div>
+    </section>
+    <section id="products-list">
+      <h1>Produits</h1>
+      <p>6 produits</p>
+      <!-- <div> to display flex articles -->
+      <div>
+        <article>
+          <a href="product.html">
+            <h3>Apple TV</h3>
+            <img src="assets/img/apple-tv.png" alt="">
+            <p>249.99$</p>
+          </a>
+        </article>
+        <article>
+          <a href="product.html">
+            <h3>Canon EOS 5D Mark II</h3>
+            <img src="assets/img/camera-1.png" alt="">
+            <p>2999.99$</p>
+          </a>
+        </article>
+        <article>
+          <a href="product.html">
+            <h3>Nikon D7000</h3>
+            <img src="assets/img/camera-2.png" alt="">
+            <p>549.99$</p>
+          </a>
+        </article>
+        <article>
+          <a href="product.html">
+            <h3>Canon PowerShot SD1300</h3>
+            <img src="assets/img/camera-3.png" alt="">
+            <p>299.99$</p>
+          </a>
+        </article>
+        <article>
+          <a href="product.html">
+            <h3>Portable</h3>
+            <img src="assets/img/laptop-1.png" alt="">
+            <p>699.99$</p>
+          </a>
+        </article>
+        <article>
+          <a href="product.html">
+            <h3>iMac 27"</h3>
+            <img src="assets/img/mac.png" alt="">
+            <p>2299.99$</p>
+          </a>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer>
+    Nicolas de Chevigné (1916313) / Pierre Terroitin (1916504)
+  </footer>
 </body>
 </html>
