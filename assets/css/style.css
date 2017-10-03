@@ -6,6 +6,7 @@ html, body {
 body {
 	color: black;
 	font-family: Arial;	
+
 }
 
 main{
@@ -45,6 +46,17 @@ header > nav a {
 header > nav a.active{
 	background-color: #1fb5e9;
 	border-radius: 4px; 
+}
+
+/*----------- footer ------------*/
+/*must add sticky footer*/
+footer{
+	height: 70px;
+	background-color: #EEEEEE;
+	display: flex;
+	justify-content: center; /* align horizontal */
+	align-items: center; /* align vertical */
+	border-top: solid #cccccc;
 }
 
 /* ---- Products list ---- */
@@ -123,14 +135,37 @@ section#products-list article p {
 	position: relative;
 }
 
-/* footer */
 
-footer{
-	height: 70px;
-	background-color: #EEEEEE;
-	display: flex;
-	justify-content: center; /* align horizontal */
-	align-items: center; /* align vertical */
-	border-top: solid #cccccc;
+
+/* index */
+#left-side{
+	position: relative;
+	float: left;
 }
 
+#img-home{
+	position : relative;
+	height: 300px;
+	float: right;
+}
+
+.btn{
+	float: left;
+	background-color:#14597f; 
+	padding: 10px;
+	border: 1px solid #0b2d3d;
+	border-radius: 4px;
+	transition: 0.2s;
+	transition-timing-function: ease-out;
+}
+
+.btn:hover{
+	background-color:#1fb5e9; 
+	padding: 10px;
+	border: 1px solid #0b2d3d;
+	border-radius: 4px;
+}
+
+.btn > a {
+	color: white;
+}
