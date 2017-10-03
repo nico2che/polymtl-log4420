@@ -1,3 +1,5 @@
+/* Commun à toutes les pages */
+
 body {
 	color: black;
 	font-family: Arial;	
@@ -12,8 +14,8 @@ main{
 
 a {
 	text-decoration: none;
-	
 }
+
 
 header {
 	background-color: #14597f;
