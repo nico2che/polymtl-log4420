@@ -213,4 +213,17 @@ section#product-description .form-control{
 	font-weight: bold;
 }
 
+/* --------- contact ------------*/
 
+div#contact-content{
+	display: flex;
+	padding: 30px;
+}
+
+div#contact-content section{
+text-align: center;
+}
+
+div#contact-content i{
+	font-size: 100px;
+}
