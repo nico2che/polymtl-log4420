@@ -213,6 +213,16 @@ section#product-description .form-control{
 	font-weight: bold;
 }
 
+.form-control #btn-valider{
+border: none;
+color: white;
+background-color: #14597f;
+}
+
+.form-control i{
+font-size: 17px;
+}
+
 /* --------- contact ------------*/
 
 div#contact-content{
