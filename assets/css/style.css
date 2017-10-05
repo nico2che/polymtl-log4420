@@ -223,10 +223,9 @@ background-color: #14597f;
 
 
 .form-control #btn-valider:hover{
-border: none;
-color: white;
-min-width: 80px;
 background-color: #1fb5e9;
+min-width: 80px;
+
 }
 
 .form-control i{
