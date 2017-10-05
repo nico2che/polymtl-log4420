@@ -178,12 +178,7 @@ div#product-content {
 	font-size: 13px;
 }
 
-section#product-image {
-	flex:1;
-}
-
-
-section#product-description {
+.col{
 	flex:1;
 }
 
@@ -217,3 +212,5 @@ section#product-description .form-control{
 	float: left;
 	font-weight: bold;
 }
+
+
