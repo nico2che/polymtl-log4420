@@ -25,6 +25,7 @@ header {
 	height: 60px;
 	padding-right: 20px;
 	padding-left: 20px;
+
 }
 
 header > a > img {
@@ -36,6 +37,7 @@ header > a > img {
 header > nav {
 	position: relative;
 	float: right;
+	margin-top: 10px;
 }
 
 header > nav a {
@@ -47,6 +49,7 @@ header > nav a.active{
 	background-color: #1fb5e9;
 	border-radius: 4px; 
 }
+
 
 /*----------- footer ------------*/
 /*must add sticky foote*/
@@ -153,7 +156,6 @@ section#products-list article p {
 	color: white;
 	float: left;
 	background-color:#14597f; 
-	padding: 10px;
 	border: 1px solid #0b2d3d;
 	border-radius: 4px;
 	transition: 0.2s;
@@ -162,7 +164,6 @@ section#products-list article p {
 
 .btn:hover{
 	background-color:#1fb5e9; 
-	padding: 10px;
 	border: 1px solid #0b2d3d;
 	border-radius: 4px;
 
@@ -196,6 +197,8 @@ section#product-description .form-control{
 
 .form-control .btn{
 	float: right;
+margin-left: 20px;
+
 }
 
 #product-form{
@@ -214,7 +217,16 @@ section#product-description .form-control{
 .form-control #btn-valider{
 border: none;
 color: white;
+min-width: 80px;
 background-color: #14597f;
+}
+
+
+.form-control #btn-valider:hover{
+border: none;
+color: white;
+min-width: 80px;
+background-color: #1fb5e9;
 }
 
 .form-control i{
