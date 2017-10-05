@@ -187,13 +187,11 @@ section#product-description .form-control{
 	padding-top: 20px;	
 }
 
-.form-control #quantity{
+.form-control input{
 	border: solid #999999 1px;
 	border-radius: 4px;
 	padding: 10px;
 	width: 40px;
-	margin-left: 10px;
-	margin-right: 10px;
 }
 
 .form-control .btn{
@@ -239,3 +237,24 @@ text-align: center;
 div#contact-content i{
 	font-size: 100px;
 }
+
+/* ------------- order -------------- */
+div#commande, div#paiement{
+	display: flex;
+}
+
+main#order p {
+	font-weight: bold;
+
+}
+
+#btn-payer{
+	float: right;
+	width: 100px;
+}
+
+main#order .col input{
+	min-width: 90%;
+}
+
+
