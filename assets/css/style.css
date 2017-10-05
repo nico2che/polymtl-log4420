@@ -228,6 +228,8 @@ font-size: 17px;
 div#contact-content{
 	display: flex;
 	padding: 30px;
+	border: solid #999999 1px;
+	border-radius: 4px;
 }
 
 div#contact-content section{
