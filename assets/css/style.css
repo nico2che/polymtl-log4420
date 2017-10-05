@@ -146,6 +146,10 @@ section#products-list article p {
 	float: left;
 }
 
+main#index .btn{
+	padding: 10px;
+}
+
 #img-home{
 	position : relative;
 	height: 300px;
@@ -189,16 +193,21 @@ section#product-description .form-control{
 }
 
 .form-control input{
-	border: solid #999999 1px;
+border: solid #999999 1px;
 	border-radius: 4px;
 	padding: 10px;
+	
+}
+
+.form-control #quantity{
 	width: 40px;
 }
 
-.form-control .btn{
-	float: right;
-margin-left: 20px;
-
+.form-control #btn-valider{
+	border: none;
+	background: none;
+	color: white;
+	padding: 10px;
 }
 
 #product-form{
@@ -214,19 +223,6 @@ margin-left: 20px;
 	font-weight: bold;
 }
 
-.form-control #btn-valider{
-border: none;
-color: white;
-min-width: 80px;
-background-color: #14597f;
-}
-
-
-.form-control #btn-valider:hover{
-background-color: #1fb5e9;
-min-width: 80px;
-
-}
 
 .form-control i{
 font-size: 17px;
@@ -266,6 +262,7 @@ main#order p {
 
 main#order .col input{
 	min-width: 90%;
+	border: 
 }
 
 
