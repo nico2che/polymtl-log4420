@@ -7,94 +7,96 @@
   <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 </head>
 <body>
-  <header>
+<header>
+  <div>
     <a href="index.html">
       <img src="assets/img/logo.svg" alt="Logo">
     </a>
     <nav>
-      <a href="index.html" >Accueil</a>
+      <a href="index.html">Accueil</a>
       <a href="products.html" class="active">Produits</a>
       <a href="contact.html">Contact</a>
       <a class="shopping-cart" href="./shopping-cart.html" title="Panier">
-        <span class="fa-stack fa-lg">
-          <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
-          <i class="fa fa-shopping-cart fa-stack-1x"></i>
-        </span>
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+            <i class="fa fa-shopping-cart fa-stack-1x"></i>
+          </span>
         <span class="count">3</span>
       </a>
     </nav>
-  </header>
-  <main id="products">
-    <section id="sidebar">
-      <!-- Après avoir demandé au chargé, il m'a confirmé qu'il fallait utiliser div et buttun ici -->
-      <h2>Catégories</h2>
-      <div id="product-categories"> 
-        <button class="selected">Appareils photo</button>
-        <button>Consoles</button>
-        <button>Écrans</button>
-        <button>Ordinateurs</button>
-        <button>Tous les produits</button>
-      </div>
-      <h2>Classement</h2>
-      <div id="product-criteria">
-        <button class="selected">Prix (bas-haut)</button>
-        <button>Prix (haut-bas)</button>
-        <button>Nom (A-Z)</button>
-        <button>Nom (Z-A)</button>
-      </div>
-    </section>
-    <section id="products-list">
-      <h1>Produits</h1>
-      <p>6 produits</p>
-      <!-- <div> to display flex articles -->
-      <div>
+  </div>
+</header>
+<main id="products">
+  <section id="sidebar">
+    <!-- Après avoir demandé au chargé, il m'a confirmé qu'il fallait utiliser div et buttun ici -->
+    <h2>Catégories</h2>
+    <div id="product-categories">
+      <button class="selected">Appareils photo</button>
+      <button>Consoles</button>
+      <button>Écrans</button>
+      <button>Ordinateurs</button>
+      <button>Tous les produits</button>
+    </div>
+    <h2>Classement</h2>
+    <div id="product-criteria">
+      <button class="selected">Prix (bas-haut)</button>
+      <button>Prix (haut-bas)</button>
+      <button>Nom (A-Z)</button>
+      <button>Nom (Z-A)</button>
+    </div>
+  </section>
+  <section id="products-list">
+    <p>6 produits</p>
+    <h1>Produits</h1>
+    <!-- <div> to display flex articles -->
+    <div>
+      <a href="product.html">
         <article>
-          <a href="product.html">
-            <h2>Apple TV</h2>
-            <img src="assets/img/apple-tv.png" alt="">
-            <p>249.99$</p>
-          </a>
+          <h2>Apple TV</h2>
+          <img src="assets/img/apple-tv.png" alt="">
+          <p>Prix 249.99$</p>
         </article>
+      </a>
+      <a href="product.html">
         <article>
-          <a href="product.html">
-            <h2>Canon EOS 5D Mark II</h2>
-            <img src="assets/img/camera-1.png" alt="">
-            <p>2999.99$</p>
-          </a>
+          <h2>Canon EOS 5D Mark II</h2>
+          <img src="assets/img/camera-1.png" alt="">
+          <p>Prix 2999.99$</p>
         </article>
+      </a>
+      <a href="product.html">
         <article>
-          <a href="product.html">
-            <h2>Nikon D7000</h2>
-            <img src="assets/img/camera-2.png" alt="">
-            <p>549.99$</p>
-          </a>
+          <h2>Nikon D7000</h2>
+          <img src="assets/img/camera-2.png" alt="">
+          <p>Prix 549.99$</p>
         </article>
+      </a>
+      <a href="product.html">
         <article>
-          <a href="product.html">
-            <h2>Canon PowerShot SD1300</h2>
-            <img src="assets/img/camera-3.png" alt="">
-            <p>299.99$</p>
-          </a>
+          <h2>Canon PowerShot SD1300</h2>
+          <img src="assets/img/camera-3.png" alt="">
+          <p>Prix 299.99$</p>
         </article>
+      </a>
+      <a href="product.html">
         <article>
-          <a href="product.html">
-            <h2>Portable</h2>
-            <img src="assets/img/laptop-1.png" alt="">
-            <p>699.99$</p>
-          </a>
+          <h2>Portable</h2>
+          <img src="assets/img/laptop-1.png" alt="">
+          <p>Prix 699.99$</p>
         </article>
+      </a>
+      <a href="product.html">
         <article>
-          <a href="product.html">
-            <h2>iMac 27"</h2>
-            <img src="assets/img/mac.png" alt="">
-            <p>2299.99$</p>
-          </a>
+          <h2>iMac 27"</h2>
+          <img src="assets/img/mac.png" alt="">
+          <p>Prix 2299.99$</p>
         </article>
-      </div>
-    </section>
-  </main>
-  <footer>
-    Nicolas de Chevigné (1916313) / Pierre Terroitin (1916504)
-  </footer>
+      </a>
+    </div>
+  </section>
+</main>
+<footer>
+  Nicolas de Chevigné (1916313) / Pierre Terroitin (1916504)
+</footer>
 </body>
 </html>
