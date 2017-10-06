@@ -129,9 +129,12 @@ section#products-list article p {
 
 .count{
 	position: absolute;
-	color: #d9534f;
+	background-color: #d9534f;
 	bottom: 0;
 	right: 0;
+	padding-right: 5px;
+	padding-left: 5px;
+	border-radius: 15px;
 }
 
 .shopping-cart{
