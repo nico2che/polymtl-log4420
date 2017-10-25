@@ -31,11 +31,11 @@
     <!-- Après avoir demandé au chargé, il m'a confirmé qu'il fallait utiliser div et buttun ici -->
     <h2>Catégories</h2>
     <div id="product-categories">
-      <button class="selected" data-category="cameras">Appareils photo</button>
+      <button data-category="cameras">Appareils photo</button>
       <button data-category="consoles">Consoles</button>
       <button data-category="screens">Écrans</button>
       <button data-category="computers">Ordinateurs</button>
-      <button data-category="">Tous les produits</button>
+      <button class="selected" data-category="">Tous les produits</button>
     </div>
     <h2>Classement</h2>
     <div id="product-criteria">
@@ -45,10 +45,10 @@
       <button data-criteria="name" data-order="desc">Nom (Z-A)</button>
     </div>
   </section>
-  <section id="products-list">
+  <section id="products-wrapper">
     <p id="products-count"></p>
     <h1>Produits</h1>
-    <div><!-- <div> to display flex articles --></div>
+    <div id="products-list"></div>
   </section>
 </main>
 <footer>

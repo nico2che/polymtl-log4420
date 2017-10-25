@@ -8,10 +8,6 @@
     updateCart();
 })()
 
-function index() {
-    console.log('index')
-}
-
 function products() {
     
     // Default values about products page
@@ -26,21 +22,8 @@ function products() {
         articles = data.sort(function(p1, p2) {
             return orderBy === 'asc' ? p1[criteria] - p2[criteria] : p2[criteria] - p1[criteria];
         });
-        $.each(articles, function(i, article) { // For each article
-            // Append it in flex list
-            var article = $('<a>').attr({
-                'data-category': article.category,
-                'data-name': article.name,
-                'data-price': article.price,
-                'href': 'product.html?id=' + article.id,
-            }).append('<article>' +
-                            '<h2>' + article.name + '</h2>' +
-                            '<img src="assets/img/' + article.image + '" />' + 
-                            '<p>Prix ' + article.price + ' $</p>' +
-                        '</article>');
-            $('#products-list > div').append(article);
-        });
-        $('#products-list > p').html(articles.length + ' produits');
+        // Display articles
+        displayProducts(articles);
     }, 'JSON');
 
     // Category buttons event
@@ -50,15 +33,12 @@ function products() {
         $(this).addClass('selected');
         // Update new category
         category = $(this).data('category');
-        var c = 0;
-        $('#products-list a').css({
-            'display' : 'none' // Hide all articles
-        }).filter(function(i, article) {
-            // Filter article with selected category
-            return (category === "" || $(article).data('category') === category) && ++c;
-        }).css({ 'display' : 'block' }) // And display them
-        // Update article counter
-        $('#products-count').html(c + ' produits');
+        // Get articles
+        var articleSorted = articles.filter(function(article){
+            return category === '' || article.category === category;
+        });
+        // Display articles
+        displayProducts(articleSorted);
     });
 
     // Criteria buttons event
@@ -78,9 +58,29 @@ function products() {
                 return $(p1).data(criteria) < $(p2).data(criteria) ? 1 : -1;
         }).each(function(){
             // Reorder articles
-            $('#products-list > div').append($(this))
+            $('#products-list').append($(this))
         })
     });
+}
+
+function displayProducts(articles) {
+    $('#products-list').empty();
+    articles.map(function(article){ // For each article
+        // Append it in flex list
+        var article = $('<a>').attr({
+            'data-category': article.category,
+            'data-name': article.name.toLowerCase(),
+            'data-price': article.price,
+            'href': 'product.html?id=' + article.id,
+        }).append('<article>' +
+                        '<h2>' + article.name + '</h2>' +
+                        '<img src="assets/img/' + article.image + '" />' + 
+                        '<p>Prix ' + article.price.toString().replace('.', ',') + ' $</p>' +
+                    '</article>');
+        $('#products-list').append(article);
+    });
+    // Update article counter
+    $('#products-count').html(articles.length + ' produits');
 }
 
 function product() {
