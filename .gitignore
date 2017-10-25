@@ -5,6 +5,7 @@ node_modules/
 
 tests/bin/chromedriver
 tests/reports
+tests/bin/chromedriver_mac
 
 npm-debug.log
 selenium-debug.log
