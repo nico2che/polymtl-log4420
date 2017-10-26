@@ -17,52 +17,43 @@
             <a href="products.html" class="active">Produits</a>
             <a href="contact.html">Contact</a>
             <a class="shopping-cart" href="./shopping-cart.html" title="Panier">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
-            <i class="fa fa-shopping-cart fa-stack-1x"></i>
-          </span>
-                <span class="count">3</span>
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                    <i class="fa fa-shopping-cart fa-stack-1x"></i>
+                </span>
+                <span class="count"></span>
             </a>
         </nav>
     </div>
 </header>
 <main id="product">
-    <h1>Apple TV</h1>
+    <h1 id="product-name"></h1>
     <div class="row">
         <section class="col">
-            <img src="assets/img/apple-tv.png" alt="Image Apple TV">
+            <img id="product-image">
         </section>
         <section class="col">
             <h2>Description</h2>
-            <p class="description">
-                L'Apple TV est un appareil conçu par Apple qui permet la communication sans fil entre un ordinateur et un
-                téléviseur. Il est disponible depuis fin mars 2007 dans sa première version.L'appareil ressemble alors par sa
-                forme à un Mac mini, bien qu'il ne fasse que la moitié de sa hauteur. Il communique par réseau sans fil ou
-                Ethernet, avec un appareil iOS ou avec un ordinateur (sous Mac OS X ou sous Windows) par le biais du logiciel
-                iTunes, permettant ainsi de diffuser le contenu vidéo et audio sur le téléviseur, via éventuellement un
-                amplificateur audio-vidéo. (<a href='https://fr.wikipedia.org/wiki/Apple_TV' target='_blank'>Wikipédia</a>)
-            </p>
+            <p id="product-desc"></p>
             <h2>Caractéristiques</h2>
-            <ul>
-                <li>Processeur Apple A8</li>
-                <li>Mémoire vide de 2Go</li>
-                <li>Stockage de 32 ou 64 Go en mémoire flash</li>
-                <li>Connectivités: USB Type-C, HDMI, récepteur infrarouge</li>
-                <li>Réseau: Wi-Fi (802.11a/b/g/n/ac), 10/100 Ethernet, Bluetooth, AirPlay</li>
-            </ul>
+            <ul id="product-features"></ul>
             <div id="price">
-                <p id="price-number">Prix: <span>149,99$</span></p>
-                <form method="get">
+                <p id="price-number">Prix: <span id="product-price"></span>$</p>
+                <form method="get" id="add-to-cart-form">
                     <label for="quantity">Quantité :</label>
                     <input type="number" name="quantite" value="1" min="1" step="1" required id="quantity" class="form-control">
                     <button type="submit" class="btn"><i class="fa fa-cart-plus"></i> &nbsp;Ajouter</button>
                 </form>
             </div>
         </section>
+        <div id="dialog">Le produit a bien été ajouté</div>
     </div>
 </main>
 <footer>
     Nicolas de Chevigné (1916313) / Pierre Terroitin (1916504)
 </footer>
+<script type="text/javascript" src="assets/js/libs/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="assets/js/script.js"></script>
+<script type="text/javascript" src="assets/js/product.js"></script>
 </body>
 </html>

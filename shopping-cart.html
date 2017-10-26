@@ -22,7 +22,7 @@
               <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
               <i class="fa fa-shopping-cart fa-stack-1x"></i>
             </span>
-                <span class="count">3</span>
+                <span class="count"></span>
             </a>
         </nav>
     </div>
@@ -31,50 +31,27 @@
     <h1>Panier</h1>
     <table>
         <thead>
-        <tr>
-            <th></th>
-            <th>Produit</th>
-            <th>Prix unitaire</th>
-            <th>Quantité</th>
-            <th>Prix</th>
-        </tr>
+            <tr>
+                <th></th>
+                <th>Produit</th>
+                <th>Prix unitaire</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+            </tr>
         </thead>
-        <tbody>
-        <tr>
-            <td><button><i class="fa fa-remove"></i></button></td>
-            <td><a href="product.html">Apple TV</a></td>
-            <td>259.99 $</td>
-            <td><button><i class="fa fa-minus"></i></button> <span class="quantity">1</span> <button><i class="fa fa-plus"></i></button></td>
-            <td>259.99 $</td>
-        </tr>
-        <tr>
-            <td><button><i class="fa fa-remove"></i></button></td>
-            <td><a href="product.html">Nikon D7000</a></td>
-            <td>549.99 $</td>
-            <td><button><i class="fa fa-minus"></i></button> <span class="quantity">1</span> <button><i class="fa fa-plus"></i></button></td>
-            <td>549.99 $</td>
-        </tr>
-        <tr>
-            <td><button><i class="fa fa-remove"></i></button></td>
-            <td><a href="product.html">Moniteur 19"</a></td>
-            <td>149.99 $</td>
-            <td><button><i class="fa fa-minus"></i></button> <span class="quantity">2</span> <button><i class="fa fa-plus"></i></button></td>
-            <td>299.98 $</td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-            <td colspan="5">Total: <span class="bold">2999.99 $</span></td>
-        </tr>
-        </tfoot>
+        <tbody></tbody>
     </table>
     <p>
+        <span id="total-wrapper">Total: <span class="bold"><span id="total-amount"></span> $</span></span>
         <a href="order.html" class="btn pull-right">Commander &nbsp;<i class="fa fa-angle-double-right"></i></a>
-        <button class="btn"><i class="fa fa-trash"></i> &nbsp;Vider le panier</button>
+        <button class="btn" id="remove-all-items-button"><i class="fa fa-trash"></i> &nbsp;Vider le panier</button>
     </p>
 </main>
 <footer>
     Nicolas de Chevigné (1916313) / Pierre Terroitin (1916504)
 </footer>
+<script type="text/javascript" src="assets/js/libs/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="assets/js/script.js"></script>
+<script type="text/javascript" src="assets/js/shopping-cart.js"></script>
 </body>
 </html>

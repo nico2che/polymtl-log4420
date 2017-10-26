@@ -50,12 +50,21 @@ function validateProductsList(client, expectedProductsList) {
       });
 
       // Check if the product link is correct.
-      client.elementIdElement(v.ELEMENT, "css selector", "a", function(result) {
-        client.elementIdAttribute(result.value.ELEMENT, "href", function(result) {
-          var link = productConfig.url + expectedProductsList[i].id;
-          assert(result.value.indexOf(link) !== -1,
-            "Le lien pour le produit #" + id + " doit être '" + link + "'.");
-        });
+      client.elementIdName(v.ELEMENT, function(result) {
+        function validateLink(element) {
+          client.elementIdAttribute(element, "href", function(result) {
+            var link = productConfig.url + expectedProductsList[i].id;
+            assert(result.value.indexOf(link) !== -1,
+              "Le lien pour le produit #" + id + " doit être '" + link + "'.");
+          });
+        }
+        if (result.value.toLowerCase() === "a") {
+         validateLink(v.ELEMENT);
+        } else {
+          client.elementIdElement(v.ELEMENT, "css selector", "a", function(result) {
+            validateLink(result.value.ELEMENT);
+          });
+        }
       });
     })
   });
