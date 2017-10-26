@@ -75,6 +75,6 @@ var Products = (function(){
 
     return { init }
 
-})(Storage.get());
+})(Storage.getProducts());
 
 Products.init();

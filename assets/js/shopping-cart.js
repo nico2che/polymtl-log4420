@@ -47,7 +47,7 @@ var ShoppingCart = (function(articles){
         var row = $(this).parent().parent();
         var id = row.data('id'); // Get article id
         var incrementer = $(this).hasClass('remove-quantity-button') ? -1 : 1;
-        Storage.set(incrementer, id); // Update storage
+        Storage.setProduct(incrementer, id); // Update storage
         // Disable/Active button if necessary
         if(articles[id] < 2) {
             $(this).attr('disabled', 'disabled');
@@ -64,7 +64,7 @@ var ShoppingCart = (function(articles){
         if(confirm('Voulez-vous supprimer le produit du panier ?')) {
             var row = $(this).parent().parent();
             var id = row.data('id');
-            Storage.remove(id); // Update menu cart and storage
+            Storage.removeProduct(id); // Update menu cart and storage
             row.remove(); // Update table
             if(Storage.length === 0)
                 hideTable(); // Hide table if no product anymore
@@ -75,7 +75,7 @@ var ShoppingCart = (function(articles){
 
     function removeAllProducts() {
         if(confirm('Voulez-vous supprimer tous les produits du panier ?')) {
-            Storage.removeAll(); // Remove all products
+            Storage.removeAllProducts();
             hideTable();
         }
     }
@@ -96,6 +96,6 @@ var ShoppingCart = (function(articles){
 
     return { init }
 
-})(Storage.get());
+})(Storage.getProducts());
 
 ShoppingCart.init();

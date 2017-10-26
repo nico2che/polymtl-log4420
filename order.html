@@ -28,14 +28,14 @@
 </header>
 <main id="order">
     <h1>Commande</h1>
-    <form action="confirmation.html" method="post">
+    <form action="confirmation.html" id="order-form" method="post">
         <section>
             <h2>Contact</h2>
             <div class="row">
                 <div class="col">
                     <p>
-                        <label for="firstname">Prénom</label>
-                        <input type="text" name="firstname" id="firstname" placeholder="Prénom" required class="form-control">
+                        <label for="first-name">Prénom</label>
+                        <input minlength="2" type="text" name="first-name" id="first-name" placeholder="Prénom" required class="form-control">
                     </p>
                     <p>
                         <label for="email">Adresse courriel</label>
@@ -44,12 +44,12 @@
                 </div>
                 <div class="col">
                     <p>
-                        <label for="lastname">Nom</label>
-                        <input type="text" name="lastname" id="lastname" placeholder="Nom" required class="form-control">
+                        <label for="last-name">Nom</label>
+                        <input minlength="2" type="text" name="last-name" id="last-name" placeholder="Nom" required class="form-control">
                     </p>
                     <p>
                         <label for="phone">Téléphone</label>
-                        <input type="tel" name="phone" id="phone" placeholder="###-###-####" required pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" class="form-control">
+                        <input type="tel" name="phone" id="phone" placeholder="###-###-####" required class="form-control">
                     </p>
                 </div>
             </div>
@@ -60,15 +60,13 @@
                 <div class="col">
                     <p>
                         <label for="credit-card">Numéro de carte de crédit</label>
-                        <input type="password" name="credit-card" id="credit-card" required pattern="^[0-9]{13,16}$" class="form-control">
+                        <input type="password" name="credit-card" id="credit-card" required class="form-control">
                     </p>
                 </div>
                 <div class="col">
                     <p>
                         <label for="credit-card-expiry">Date d’expiration de la carte</label>
-                        <!-- placeholder & pattern MM/YYYY if month type is not supported but that would be cool
-                             to add them, because browsers like mozilla don't support month type (yet) :'( -->
-                        <input type="month" name="credit-card-expiry" id="credit-card-expiry" required class="form-control">
+                        <input name="credit-card-expiry" id="credit-card-expiry" placeholder="MM/YY" required class="form-control">
                     </p>
                 </div>
             </div>
@@ -82,7 +80,10 @@
     Nicolas de Chevigné (1916313) / Pierre Terroitin (1916504)
 </footer>
 <script type="text/javascript" src="assets/js/libs/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="assets/js/order.js"></script>
+<script type="text/javascript" src="assets/js/libs/jquery.validate.min.js"></script>
+<script type="text/javascript" src="assets/js/libs/additional-methods.min.js"></script>
+<script type="text/javascript" src="assets/js/libs/messages_fr.js"></script>
 <script type="text/javascript" src="assets/js/script.js"></script>
+<script type="text/javascript" src="assets/js/order.js"></script>
 </body>
 </html>

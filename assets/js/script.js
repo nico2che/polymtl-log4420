@@ -16,7 +16,7 @@ var Storage = (function(){
     /**
      * Get all articles
      */
-    function get() {
+    function getProducts() {
         if (products) {
             return products;
         } else {
@@ -32,7 +32,7 @@ var Storage = (function(){
      * @param {int} number 
      * @param {int} article 
      */
-    function set(number, article) {
+    function setProduct(number, article) {
         number = parseInt(number);
         products[article] = products[article] ? products[article] + number : number;
         updateCounter();
@@ -44,7 +44,7 @@ var Storage = (function(){
      * Remove all specific article
      * @param {int} article 
      */
-    function remove(article) {
+    function removeProduct(article) {
         delete products[article]; // Remove article
         updateCounter();
         localStorage.setItem('cart', JSON.stringify(products)); // Save
@@ -54,7 +54,7 @@ var Storage = (function(){
     /**
      * Remove all articles
      */
-    function removeAll() {
+    function removeAllProducts() {
         products = {};
         updateCounter();
         localStorage.removeItem('cart');
@@ -66,7 +66,29 @@ var Storage = (function(){
         count > 0 ? $('.shopping-cart .count').html(count).show() : $('.shopping-cart .count').hide();
     }
 
-    return { get, set, remove, removeAll, length }
+    function createCommand(firstname, lastname) {
+        var commands = localStorage.getItem('commands');
+        if (commands) {
+            commands = JSON.parse(commands);
+            var commandKeys = Object.keys(commands);
+            var id = commandKeys[commandKeys.length - 1].id + 1;
+        } else {
+            commands = {};
+            var id = 1;
+        }
+        commands[id] = { id, firstname, lastname, products };
+        localStorage.setItem('commands', JSON.stringify(commands));
+        removeAllProducts();
+        return id;
+    }
+
+    function getCommand(id) {
+        var commands = localStorage.getItem('commands');
+        commands = commands ? JSON.parse(commands) : {};
+        return commands[id];
+    }
+
+    return { getProducts, setProduct, removeProduct, removeAllProducts, createCommand, length, getCommands }
 })();
 
 var View = (function(){

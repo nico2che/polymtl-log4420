@@ -5,7 +5,7 @@ var Product = (function(){
     var article = null;
 
     function init() {
-        Storage.get();
+        Storage.getProducts();
         // Get id from URL
         var id = /id=(\d+)$/.exec(window.location.search);
         if(id && id[1]) { // Check if id exists
@@ -54,12 +54,12 @@ var Product = (function(){
             $('#dialog').removeClass('show');
         }, 5000);
         var numberArticles = $('#add-to-cart-form input').val(); // Increment basket count
-        Storage.set(numberArticles, article.id);
+        Storage.setProduct(numberArticles, article.id);
         return false; // Prevent submitted form
     }
 
     return { init }
 
-})(Storage.get());
+})(Storage.getProducts());
 
 Product.init();
