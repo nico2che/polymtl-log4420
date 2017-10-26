@@ -22,7 +22,7 @@
               <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
               <i class="fa fa-shopping-cart fa-stack-1x"></i>
             </span>
-                <span class="count">3</span>
+                <span class="count"></span>
             </a>
         </nav>
     </div>
@@ -31,32 +31,27 @@
     <h1>Panier</h1>
     <table>
         <thead>
-        <tr>
-            <th></th>
-            <th>Produit</th>
-            <th>Prix unitaire</th>
-            <th>Quantité</th>
-            <th>Prix</th>
-        </tr>
+            <tr>
+                <th></th>
+                <th>Produit</th>
+                <th>Prix unitaire</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+            </tr>
         </thead>
-        <tbody>
-        </tbody>
-        <tfoot>
-        <tr>
-            <td colspan="5">Total: <span class="bold" id="total-amount"></span></td>
-        </tr>
-        </tfoot>
+        <tbody></tbody>
     </table>
     <p>
+        <span id="total-wrapper">Total: <span class="bold"><span id="total-amount"></span> $</span></span>
         <a href="order.html" class="btn pull-right">Commander &nbsp;<i class="fa fa-angle-double-right"></i></a>
-        <button class="btn remove-all-items-button"><i class="fa fa-trash"></i> &nbsp;Vider le panier</button>
+        <button class="btn" id="remove-all-items-button"><i class="fa fa-trash"></i> &nbsp;Vider le panier</button>
     </p>
 </main>
 <footer>
     Nicolas de Chevigné (1916313) / Pierre Terroitin (1916504)
 </footer>
 <script type="text/javascript" src="assets/js/libs/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="assets/js/shopping-cart.js"></script>
 <script type="text/javascript" src="assets/js/script.js"></script>
+<script type="text/javascript" src="assets/js/shopping-cart.js"></script>
 </body>
 </html>

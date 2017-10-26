@@ -359,8 +359,10 @@ footer {
 #shopping-cart table td > button:hover  {
 	background-color: #bbbbbb;
 }
-#shopping-cart table > tfoot > tr > td  {
+#total-wrapper {
+	margin-bottom: 30px;
 	text-align: right;
+	display: block;
 }
 
 /* ------------- order -------------- */
