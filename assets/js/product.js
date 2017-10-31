@@ -5,7 +5,6 @@ var Product = (function(){
     var article = null;
 
     function init() {
-        Storage.getProducts();
         // Get id from URL
         var id = /id=(\d+)$/.exec(window.location.search);
         if(id && id[1]) { // Check if id exists

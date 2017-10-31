@@ -30,13 +30,13 @@ var Order = (function(){
     function onSubmit() {
         var firstname = $('#first-name').val(),
             lastname = $('#last-name').val();
-        var idCommand = Storage.createCommand(firstname, lastname);
-        window.location = 'confirmation.html?command=' + idCommand;
+        Storage.createCommand(firstname, lastname);
+        window.location = 'confirmation.html';
     }
     
     function validationAddMethods() {
         $.validator.addMethod('creditcarddate', function(value, element, params) {
-                    var date = /(0[1-9]|1[0-2])\/(\d{2})/.exec(value);
+                    var date = /^(0[1-9]|1[0-2])\/(\d{2})$/.exec(value);
                     if(date && date[1] && date[2]) {
                         var minMonth = new Date().getMonth() + 1;
                         var minYear = new Date().getFullYear();

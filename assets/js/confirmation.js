@@ -1,18 +1,19 @@
 "use strict";
 
-var Confirmation = (function(commands){
+var Confirmation = (function(command){
 
     function init() {
-        var id = /confirmation=(\d+)$/.exec(window.location.search);
-        if (id && id[1]) {
-            var command = commands[id[1]];
+        if (command.id) {
             $('#name').html(command.firstname + ' ' + command.lastname);
             $('#confirmation-number').html(command.id)
+        } else {
+            $('h1').html('Aucune commande passée');
+            $('p').remove();
         }
     }
 
     return { init }
 
-})(Storage.getCommands());
+})(Storage.getCommand());
 
 Confirmation.init();

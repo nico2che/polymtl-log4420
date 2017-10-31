@@ -70,25 +70,20 @@ var Storage = (function(){
         var commands = localStorage.getItem('commands');
         if (commands) {
             commands = JSON.parse(commands);
-            var commandKeys = Object.keys(commands);
-            var id = commandKeys[commandKeys.length - 1].id + 1;
+            commands = { id: ++commands.id, firstname, lastname };
         } else {
-            commands = {};
-            var id = 1;
+            commands = { id: 1, firstname, lastname };
         }
-        commands[id] = { id, firstname, lastname, products };
         localStorage.setItem('commands', JSON.stringify(commands));
         removeAllProducts();
-        return id;
     }
 
-    function getCommand(id) {
+    function getCommand() {
         var commands = localStorage.getItem('commands');
-        commands = commands ? JSON.parse(commands) : {};
-        return commands[id];
+        return commands ? JSON.parse(commands) : {};
     }
 
-    return { getProducts, setProduct, removeProduct, removeAllProducts, createCommand, length, getCommands }
+    return { getProducts, setProduct, removeProduct, removeAllProducts, createCommand, length, getCommand }
 })();
 
 var View = (function(){
