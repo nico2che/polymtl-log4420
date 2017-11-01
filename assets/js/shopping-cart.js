@@ -11,8 +11,8 @@ var ShoppingCart = (function(articles){
     }
 
     function loadTable() {
-        $.get('data/products.json', function(data) {
-            data.filter(function(article){ // Filter only ou articles
+        $.get('data/products.json', function(products) {
+            products.filter(function(article){ // Filter only our articles
                 return articles[article.id];
             }).sort(function(p1, p2){ // Sort them alpha A-Z
                 return p1.name.toLowerCase() > p2.name.toLowerCase() ? 1 : -1;
