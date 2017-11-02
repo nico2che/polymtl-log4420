@@ -1,6 +1,6 @@
 "use strict";
 
-var Order = (function(){
+var Order = (function(Cart){
 
     function init() {
         validationAddMethods();
@@ -30,7 +30,7 @@ var Order = (function(){
     function onSubmit() {
         var firstname = $('#first-name').val(),
             lastname = $('#last-name').val();
-        Storage.createCommand(firstname, lastname);
+        Cart.createCommand(firstname, lastname);
         window.location = 'confirmation.html';
     }
     
@@ -50,6 +50,6 @@ var Order = (function(){
 
     return { init }
 
-})(Storage.getProducts());
+})(cart);
 
 Order.init();

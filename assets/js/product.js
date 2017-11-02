@@ -1,6 +1,6 @@
 "use strict";
 
-var Product = (function(){
+var Product = (function(Cart){
 
     var article = null;
 
@@ -42,7 +42,7 @@ var Product = (function(){
             features.append($('<li>').html(feature));
         });
         // Update price
-        $('#product-price').html(article.price.toFixed(2).replace(".", ","));
+        $('#product-price').html(formatPrice(article.price));
         // Add article to basket event
         $('#add-to-cart-form').on('submit', submitForm);
     }
@@ -53,12 +53,12 @@ var Product = (function(){
             $('#dialog').removeClass('show');
         }, 5000);
         var numberArticles = $('#add-to-cart-form input').val(); // Increment basket count
-        Storage.setProduct(numberArticles, article.id);
+        Cart.setProduct(numberArticles, article.id);
         return false; // Prevent submitted form
     }
 
     return { init }
 
-})(Storage.getProducts());
+})(cart);
 
 Product.init();

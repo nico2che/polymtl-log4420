@@ -66,7 +66,7 @@ var Products = (function(){
             }).append('<article>' +
                             '<h2>' + article.name + '</h2>' +
                             '<img src="assets/img/' + article.image + '" />' + 
-                            '<p>Prix ' + article.price.toString().replace('.', ',') + ' $</p>' +
+                            '<p>Prix ' + formatPrice(article.price) + ' $</p>' +
                         '</article>');
             $('#products-list').append(article);
         });
@@ -75,6 +75,6 @@ var Products = (function(){
 
     return { init }
 
-})(Storage.getProducts());
+})(cart);
 
 Products.init();

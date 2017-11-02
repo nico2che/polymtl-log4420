@@ -1,8 +1,9 @@
 "use strict";
 
-var Confirmation = (function(command){
+var Confirmation = (function(Cart){
 
     function init() {
+        var command = Cart.getLastCommand();
         if (command.id) {
             $('#name').html(command.firstname + ' ' + command.lastname);
             $('#confirmation-number').html(command.id)
@@ -14,6 +15,6 @@ var Confirmation = (function(command){
 
     return { init }
 
-})(Storage.getCommand());
+})(cart);
 
 Confirmation.init();

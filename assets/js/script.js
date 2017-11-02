@@ -1,72 +1,75 @@
 "use strict";
 
-var Storage = (function(){
-    
-    var products = null;
-    
-    /**
-     * Return product count
-     */
-    function length() {
-        // if(!products)
-        //     get();
-        return Object.keys(products).length ? Object.values(products).reduce((p1, p2) => p1 + p2) : 0;
-    }
+const Cart = (function(){
 
     /**
-     * Get all articles
+     * Constructor, called on `new Cart()`
+     * @return {Cart}
      */
-    function getProducts() {
-        if (products) {
-            return products;
+    function Cart() {
+        // Products will be an object like
+        // { idArticle : howMuch, ... }
+        const cart = localStorage.getItem('cart');
+        this.products = cart ? JSON.parse(cart) : {};
+        if(Object.keys(this.products).length) {
+            this.length = Object.values(this.products).reduce((p1, p2) => p1 + p2, 0);
         } else {
-            var cart = localStorage.getItem('cart');
-            products = cart ? JSON.parse(cart) : {};
-            updateCounter();
-            return products;
+            this.length = 0;
         }
+        this.updateCounter();
+        return this;
     }
 
     /**
      * Add or remove specific article, x time
      * @param {int} number 
-     * @param {int} article 
+     * @param {int} article
+     * @return {Cart}
      */
-    function setProduct(number, article) {
+    Cart.prototype.setProduct = function(number, article) {
         number = parseInt(number);
-        products[article] = products[article] ? products[article] + number : number;
-        updateCounter();
-        localStorage.setItem('cart', JSON.stringify(products));
+        this.products[article] = this.products[article] ? this.products[article] + number : number;
+        this.length += number;
+        this.updateCounter();
+        localStorage.setItem('cart', JSON.stringify(this.products));
         return this;
     }
     
     /**
      * Remove all specific article
      * @param {int} article 
+     * @return boolean
      */
-    function removeProduct(article) {
-        delete products[article]; // Remove article
-        updateCounter();
-        localStorage.setItem('cart', JSON.stringify(products)); // Save
-        return this;
+    Cart.prototype.removeProduct = function(article) {
+        if(this.products[article]) {
+            this.length -= this.products[article];
+            this.updateCounter();
+            delete this.products[article];
+            localStorage.setItem('cart', JSON.stringify(this.products)); // Save
+            return true;
+        } else {
+            return false;
+        }
     }
         
     /**
      * Remove all articles
+     * @return void
      */
-    function removeAllProducts() {
-        products = {};
-        updateCounter();
+    Cart.prototype.removeAllProducts = function() {
+        this.length = 0;
+        this.products = {};
+        this.updateCounter();
         localStorage.removeItem('cart');
-        return this;
     }
-
-    function updateCounter() {
-        var count = length();
-        count > 0 ? $('.shopping-cart .count').html(count).show() : $('.shopping-cart .count').hide();
-    }
-
-    function createCommand(firstname, lastname) {
+    
+    /**
+     * Create command with all products and remove them from cart
+     * @param firstname Shopper firstname
+     * @param lastname Shopper lastname
+     * @return void
+     */
+    Cart.prototype.createCommand = function(firstname, lastname) {
         var commands = localStorage.getItem('commands');
         if (commands) {
             commands = JSON.parse(commands);
@@ -75,22 +78,36 @@ var Storage = (function(){
             commands = { id: 1, firstname, lastname };
         }
         localStorage.setItem('commands', JSON.stringify(commands));
-        removeAllProducts();
+        this.removeAllProducts();
     }
-
-    function getCommand() {
-        var commands = localStorage.getItem('commands');
+    
+    /**
+     * Get the last command created
+     * @return {Object} last command
+     */
+    Cart.prototype.getLastCommand = function() {
+        let commands = localStorage.getItem('commands');
         return commands ? JSON.parse(commands) : {};
     }
-
-    return { getProducts, setProduct, removeProduct, removeAllProducts, createCommand, length, getCommand }
-})();
-
-var View = (function(){
-
-    function formatPrice(price) {
-        return price.toFixed(2).toString().replace('.', ',');
+    
+    /**
+     * Update top right corner product counter with products length
+     * @return void
+     */
+    Cart.prototype.updateCounter = function() {
+        this.length > 0 ?
+            $('.shopping-cart .count').html(this.length).show()
+            : $('.shopping-cart .count').hide();
     }
 
-    return { formatPrice }
+    return Cart;
 })();
+
+/**
+ * Initialize Cart on all pages to update menu counter
+ */
+const cart = new Cart;
+
+function formatPrice(price) {
+    return price.toFixed(2).toString().replace('.', ',');
+}
