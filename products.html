@@ -21,7 +21,7 @@
             <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
             <i class="fa fa-shopping-cart fa-stack-1x"></i>
           </span>
-        <span class="count">3</span>
+          <span class="count" style="display:none;"></span>
       </a>
     </nav>
   </div>
@@ -31,72 +31,31 @@
     <!-- Après avoir demandé au chargé, il m'a confirmé qu'il fallait utiliser div et buttun ici -->
     <h2>Catégories</h2>
     <div id="product-categories">
-      <button class="selected">Appareils photo</button>
-      <button>Consoles</button>
-      <button>Écrans</button>
-      <button>Ordinateurs</button>
-      <button>Tous les produits</button>
+      <button data-category="cameras">Appareils photo</button>
+      <button data-category="consoles">Consoles</button>
+      <button data-category="screens">Écrans</button>
+      <button data-category="computers">Ordinateurs</button>
+      <button class="selected" data-category="">Tous les produits</button>
     </div>
     <h2>Classement</h2>
     <div id="product-criteria">
-      <button class="selected">Prix (bas-haut)</button>
-      <button>Prix (haut-bas)</button>
-      <button>Nom (A-Z)</button>
-      <button>Nom (Z-A)</button>
+      <button class="selected" data-criteria="price" data-order="asc">Prix (bas-haut)</button>
+      <button data-criteria="price" data-order="desc">Prix (haut-bas)</button>
+      <button data-criteria="name" data-order="asc">Nom (A-Z)</button>
+      <button data-criteria="name" data-order="desc">Nom (Z-A)</button>
     </div>
   </section>
-  <section id="products-list">
-    <p>6 produits</p>
+  <section id="products-wrapper">
+    <p id="products-count"></p>
     <h1>Produits</h1>
-    <!-- <div> to display flex articles -->
-    <div>
-      <a href="product.html">
-        <article>
-          <h2>Apple TV</h2>
-          <img src="assets/img/apple-tv.png" alt="">
-          <p>Prix 249.99$</p>
-        </article>
-      </a>
-      <a href="product.html">
-        <article>
-          <h2>Canon EOS 5D Mark II</h2>
-          <img src="assets/img/camera-1.png" alt="">
-          <p>Prix 2999.99$</p>
-        </article>
-      </a>
-      <a href="product.html">
-        <article>
-          <h2>Nikon D7000</h2>
-          <img src="assets/img/camera-2.png" alt="">
-          <p>Prix 549.99$</p>
-        </article>
-      </a>
-      <a href="product.html">
-        <article>
-          <h2>Canon PowerShot SD1300</h2>
-          <img src="assets/img/camera-3.png" alt="">
-          <p>Prix 299.99$</p>
-        </article>
-      </a>
-      <a href="product.html">
-        <article>
-          <h2>Portable</h2>
-          <img src="assets/img/laptop-1.png" alt="">
-          <p>Prix 699.99$</p>
-        </article>
-      </a>
-      <a href="product.html">
-        <article>
-          <h2>iMac 27"</h2>
-          <img src="assets/img/mac.png" alt="">
-          <p>Prix 2299.99$</p>
-        </article>
-      </a>
-    </div>
+    <div id="products-list"></div>
   </section>
 </main>
 <footer>
   Nicolas de Chevigné (1916313) / Pierre Terroitin (1916504)
 </footer>
+<script type="text/javascript" src="assets/js/libs/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="assets/js/script.js"></script>
+<script type="text/javascript" src="assets/js/products.js"></script>
 </body>
 </html>
