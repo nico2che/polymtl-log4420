@@ -381,4 +381,29 @@ footer {
 	padding-right:30px;
 }
 
+#order .error{
+	color: red !important;
+}
 
+#order .error::-webkit-input-placeholder {
+   color: red !important;
+}
+#order .error:-moz-placeholder {
+   color: red;
+   opacity: 1;
+}
+#order .error::-moz-placeholder {
+   color: red;
+   opacity: 1;
+}
+#order .error:-ms-input-placeholder {
+   color: red;
+}
+#order .error::-ms-input-placeholder {
+   color: red;
+}
+
+#order .error:not(input) {
+    position: relative;
+    top: 4px;
+}
