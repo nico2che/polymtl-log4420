@@ -62,30 +62,42 @@ var inputs = [
 
 module.exports = {
   before: function(client) {
-    var productConfig = require("./data/config.json").product;
-    var productsList = require("./data/products.json");
+    client.perform(function(done) {
+      var request = require("request");
 
-    expectedProduct = productsList[utils.getRandomIntInclusive(0, productsList.length - 1)];
-    client.url("http://localhost:8000/" + productConfig.url + expectedProduct.id)
-      .waitForUpdate()
-      .clearValue(productConfig.elements.input)
-      .setValue(productConfig.elements.input, 1)
-      .submitForm(productConfig.elements.form, function() {
-        console.log("Le produit '" + expectedProduct.name + "' a été ajouté au panier.");
-      });
+      // Delete all the orders in the database.
+      request.delete("http://localhost:8000/api/orders", function(err, response) {
+        if (err || response.statusCode !== 204) {
+          client.assert.fail("Une erreur est survenue lors de la suppression des commandes avec l'API.");
+        }
+        var productConfig = require("./data/config.json").product;
+        var productsList = require("./data/products.json");
+
+        expectedProduct = productsList[utils.getRandomIntInclusive(0, productsList.length - 1)];
+        client.url("http://localhost:8000/" + productConfig.url + expectedProduct.id)
+          .waitForUpdate()
+          .clearValue(productConfig.elements.input)
+          .setValue(productConfig.elements.input, 1)
+          .submitForm(productConfig.elements.form, function() {
+            console.log("Le produit '" + expectedProduct.name + "' a été ajouté au panier.");
+            client.waitForUpdate();
+            done();
+          });
+      })
+    });
   },
-  "État du panier d'achats": function(client) {
+  "Etat du panier d'achats": function(client) {
+    //var expectedTotalAmount = utils.getFormattedPrice(expectedProduct.price);
     client.url("http://localhost:8000/" + config.url)
       .waitForUpdate();
 
-	// @Disabled
-    /*var expectedTotalAmount = utils.getFormattedPrice(expectedProduct.price);
-	client.verify.containsText(config.elements.totalAmount, expectedTotalAmount,
+    // @Disabled
+    /*client.verify.containsText(config.elements.totalAmount, expectedTotalAmount,
       "Le total indiqué doit être '" + expectedTotalAmount + "$'.");*/
 
     // Validate if the shopping cart count is correct.
     client.assert.visible(shoppingCartConfig.elements.count,
-      "Le nombre de produits dans le panier doit pas être visible.");
+      "Le nombre de produits dans le panier doit être visible.");
     client.assert.containsText(shoppingCartConfig.elements.count, 1,
       "Le nombre de produits dans le panier doit être de '1'.");
   },
@@ -137,8 +149,13 @@ module.exports = {
 
     // Validate if the shopping cart count is hidden when the cart is empty.
     client.assert.hidden(shoppingCartConfig.elements.count,
-        "Le nombre de produits dans le panier ne doit pas être visible lorsque le panier est vide.");
+      "Le nombre de produits dans le panier ne doit pas être visible lorsque le panier est vide.");
 
+    client.reqGet("http://localhost:8000/api/orders", function(err, orders) {
+      if (!err && orders) {
+       client.assert.equal(orders.length, 1, "Une commande se trouve dans la base de données.");
+      }
+    });
     client.end();
   }
 };

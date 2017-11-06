@@ -39,6 +39,7 @@ self.stripHTMLTags = function(html) {
   return html.replace(/<(?:.|\n)*?>/gm, "");
 };
 
+
 /**
  * Shuffles the specified array.
  *

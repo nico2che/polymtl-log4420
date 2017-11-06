@@ -1,12 +1,8 @@
-.idea/
-.vscode/
-.DS_Store
-
-node_modules/
-
-tests/bin/chromedriver
+# Folders
+.idea
+node_modules
 tests/reports
-tests/bin/chromedriver_mac
 
-npm-debug.log
+# Files
 selenium-debug.log
+npm-debug.log

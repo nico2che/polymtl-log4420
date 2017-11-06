@@ -117,11 +117,33 @@ function validateTotalAmount(client, productsList) {
     "Le total doit être '" + expectedTotalAmount + "$'.");
 }
 
+/**
+ * Validates if the shopping cart is valid in the API.
+ *
+ * @param client        The client to use.
+ * @param productsList  The expected list to use.
+ */
+function validateShoppingCartWithAPI(client, productsList) {
+  client.reqGet("http://localhost:8000/api/shopping-cart", function(err, response) {
+    if (!err) {
+      var isValid = productsList.length === 0 || response.length === productsList.length &&
+        response.every(function(item) {
+          return productsList.find(function(product) {
+              return product.id === item.productId && item.quantity === product.quantity;
+            }) !== undefined;
+        });
+      client.assert.ok(isValid, "Les items se trouvant dans le panier d'achats via l'API sont corrects. ");
+    } else {
+      client.fail("L'API du panier d'achats indique une erreur.")
+    }
+  });
+}
+
 module.exports = {
-  before: function() {
+  before: function(client) {
     var MAX_COUNT = 3;
     var productsList = require("./data/products.json");
-    var ranNums = utils.shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]);
+    var ranNums = utils.shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
     expectedProducts = [];
     for (var i = 0; i < MAX_COUNT; ++i) {
@@ -152,6 +174,7 @@ module.exports = {
   },
   "Un ou plusieurs produits dans le panier": function(client) {
     var productConfig = require("./data/config.json").product;
+    var items = [];
 
     // Add some products into the cart.
     expectedProducts.forEach(function(product) {
@@ -160,13 +183,15 @@ module.exports = {
         .clearValue(productConfig.elements.input)
         .setValue(productConfig.elements.input, product.quantity)
         .submitForm(productConfig.elements.form, function() {
-          console.log("Le produit '" + product.name + "' a été ajouté au panier.")
+          console.log("Le produit '" + product.name + "' a été ajouté au panier.");
+          client.waitForUpdate();
         });
     });
 
     client.url("http://localhost:8000/" + config.url)
       .waitForUpdate();
 
+    validateShoppingCartWithAPI(client, expectedProducts);
     validateShoppingCartTable(client, expectedProducts);
     validateTotalAmount(client, expectedProducts);
   },
@@ -192,6 +217,7 @@ module.exports = {
 
       // Check if the item was deleted.
       client.waitForUpdate();
+      validateShoppingCartWithAPI(client, expectedProducts);
       validateShoppingCartTable(client, expectedProducts);
       validateTotalAmount(client, expectedProducts);
     });
@@ -201,6 +227,7 @@ module.exports = {
       console.log("Le bouton permettant d'augmenter la quantité pour le produit #1 a été cliqué...");
       expectedProducts[0].quantity += 1;
       client.waitForUpdate();
+      validateShoppingCartWithAPI(client, expectedProducts);
       validateShoppingCartTable(client, expectedProducts);
       validateTotalAmount(client, expectedProducts);
     });
@@ -210,6 +237,7 @@ module.exports = {
       console.log("Le bouton permettant de diminuer la quantité pour le produit #1 a été cliqué...");
       expectedProducts[0].quantity -= 1;
       client.waitForUpdate();
+      validateShoppingCartWithAPI(client, expectedProducts);
       validateShoppingCartTable(client, expectedProducts);
       validateTotalAmount(client, expectedProducts);
     });
@@ -231,6 +259,7 @@ module.exports = {
     pressRemoveAllItemsButton().acceptAlert(function () {
       console.log("La suppression a été acceptée.");
       client.waitForUpdate();
+      validateShoppingCartWithAPI(client, []);
       validateEmptyShoppingCartView(client)
     });
     client.end();
