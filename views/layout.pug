@@ -1,7 +1,31 @@
-doctype html
+//- layout.pug
 html
+
   head
-    title= title
-    link(rel='stylesheet', href='/css/style.css')
+    meta(charset='UTF-8')
+    title OnlineShop - Accueil
+    link(rel='stylesheet', type='text/css', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+    link(rel='stylesheet', type='text/css', href='/assets/css/style.css')
+
   body
+    header
+      div
+        a(href='index.html')
+          img(src='assets/img/logo.svg', alt='Logo')
+      nav
+        a.active(href='index.html') Accueil
+        a(href='products.html') Produits
+        a(href='contact.html') Contact
+        a.shopping-cart(href='./shopping-cart.html', title='Panier')
+          span.fa-stack.fa-lg
+            i.fa.fa-circle.fa-stack-2x.fa-inverse
+            i.fa.fa-shopping-cart.fa-stack-1x
+          span.count(style='display:none;')
+    
     block content
+
+    footer
+      | Nicolas de Chevigné (1916313) / Pierre Terroitin (1916504)
+
+
+    script(src='/jquery.js')
