@@ -6,9 +6,9 @@ var Product = (function(Cart){
 
     function init() {
         // Get id from URL
-        var id = /id=(\d+)$/.exec(window.location.search);
+        var id = /\/(\d+)$/.exec(window.location.pathname);
         if(id && id[1]) { // Check if id exists
-            $.get('data/products.json', function(articles) { // Find all products
+            $.get('/data/products.json', function(articles) { // Find all products
                 // Find article selected in loaded articles
                 var index = articles.findIndex(function(article){ return article.id == id[1] });
                 article = articles[index];

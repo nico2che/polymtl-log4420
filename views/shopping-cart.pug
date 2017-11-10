@@ -1,0 +1,30 @@
+//- page-a.pug
+extends layout.pug
+
+block content
+  main#shopping-cart
+    h1 Panier
+    table
+      thead
+        tr
+          th
+          th Produit
+          th Prix unitaire
+          th Quantité
+          th Prix
+      tbody
+    p
+      span#total-wrapper
+        | Total:
+        span.bold
+          span#total-amount
+          |  $
+      a.btn.pull-right(href='order.html')
+        | Commander  
+        i.fa.fa-angle-double-right
+      button#remove-all-items-button.btn
+        i.fa.fa-trash
+        |   Vider le panier
+
+block scripts
+  script(src='/assets/scripts/shopping-cart.js')

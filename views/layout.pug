@@ -1,4 +1,5 @@
 //- layout.pug
+<!DOCTYPE html>
 html
 
   head
@@ -10,22 +11,24 @@ html
   body
     header
       div
-        a(href='index.html')
-          img(src='assets/img/logo.svg', alt='Logo')
-      nav
-        a.active(href='index.html') Accueil
-        a(href='products.html') Produits
-        a(href='contact.html') Contact
-        a.shopping-cart(href='./shopping-cart.html', title='Panier')
-          span.fa-stack.fa-lg
-            i.fa.fa-circle.fa-stack-2x.fa-inverse
-            i.fa.fa-shopping-cart.fa-stack-1x
-          span.count(style='display:none;')
-    
+        a(href='/')
+          img(src='/assets/img/logo.svg', alt='Logo')
+        nav
+          a.active(href='/') Accueil
+          a(href='/produits') Produits
+          a(href='/contact') Contact
+          a.shopping-cart(href='/panier', title='Panier')
+            span.fa-stack.fa-lg
+              i.fa.fa-circle.fa-stack-2x.fa-inverse
+              i.fa.fa-shopping-cart.fa-stack-1x
+            span.count(style='display:none;')
+
     block content
 
     footer
       | Nicolas de Chevigné (1916313) / Pierre Terroitin (1916504)
 
 
-    script(src='/jquery.js')
+    script(src='/assets/js/jquery-3.2.1.min.js')
+    script(src='/assets/scripts/script.js')
+    block scripts

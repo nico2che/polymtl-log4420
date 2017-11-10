@@ -16,11 +16,11 @@ var Products = (function(){
             });
             displayProducts(articles);
             $('#products-count').html(articles.length + ' produits');
-        }, 'JSON');     
+        }, 'JSON');
         $('#product-categories > button').on('click', sortCategory); // Category buttons event
         $('#product-criteria > button').on('click', sortCriteria); // Criteria buttons event
     }
-    
+
     function sortCategory() {
         // Change selected style
         $('#product-categories > button.selected').removeClass('selected');
@@ -33,7 +33,7 @@ var Products = (function(){
         });
         displayProducts(articleSorted);
     }
-    
+
     function sortCriteria() {
         // Change selected style
         $('#product-criteria > button.selected').removeClass('selected');
@@ -62,15 +62,15 @@ var Products = (function(){
                 'data-category': article.category,
                 'data-name': article.name.toLowerCase(),
                 'data-price': article.price,
-                'href': 'product.html?id=' + article.id,
+                'href': 'produit/' + article.id,
             }).append('<article>' +
                             '<h2>' + article.name + '</h2>' +
-                            '<img src="assets/img/' + article.image + '" />' + 
+                            '<img src="assets/img/' + article.image + '" />' +
                             '<p>Prix ' + formatPrice(article.price) + ' $</p>' +
                         '</article>');
             $('#products-list').append(article);
         });
-        $('#products-count').html(articles.length + ' produits');       
+        $('#products-count').html(articles.length + ' produits');
     }
 
     return { init }
