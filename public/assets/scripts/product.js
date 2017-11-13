@@ -8,16 +8,13 @@ var Product = (function(Cart){
         // Get id from URL
         var id = /id=(\d+)$/.exec(window.location.search);
         if(id && id[1]) { // Check if id exists
-            $.get('/api/products/' + id[1], function(article) { // Find all products
-                // Find article selected in loaded articles
-                // var index = articles.findIndex(function(article){ return article.id == id[1] });
-                // article = articles[index];
-                if(article) { // Check if article exists
+            $.get('/api/products/' + id[1], data => {
+                article = data;
+                if(article)
                     displayProduct();
-                } else {
+                else
                     productNotFound();
-                }
-            }, 'JSON');
+            }, 'JSON')
         } else {
             productNotFound();
         }
