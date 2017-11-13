@@ -13,7 +13,7 @@ router.get("/produits", function(req, res) {
   res.render("products", { title: "Produits" });
 });
 
-router.get("/produit/:id", function(req, res) {
+router.get("/produit", function(req, res) {
   res.render("product", { title: "Produit" });
 });
 

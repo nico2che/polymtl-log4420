@@ -9,7 +9,7 @@ var Products = (function(){
 
     function init() {
         // Get all products
-        $.get('data/products.json', function(data) {
+        $.get('/api/products', function(data) {
              // Sort received data with custom function
             articles = data.sort(function(p1, p2) {
                 return orderBy === 'asc' ? p1[criteria] - p2[criteria] : p2[criteria] - p1[criteria];
@@ -62,7 +62,7 @@ var Products = (function(){
                 'data-category': article.category,
                 'data-name': article.name.toLowerCase(),
                 'data-price': article.price,
-                'href': 'produit/' + article.id,
+                'href': 'produit?id=' + article.id,
             }).append('<article>' +
                             '<h2>' + article.name + '</h2>' +
                             '<img src="assets/img/' + article.image + '" />' +
