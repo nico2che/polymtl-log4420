@@ -2,15 +2,41 @@
 extends layout.pug
 
 block content
-  main
-    p.pull-right
-      img#img-home(src='/assets/img/home.png', alt='image-home')
-    h1 Le site numéro 1 pour les achats en ligne
-    p Découvrez nos différents produits au meilleur prix
-    p
-      a#lien-produits.btn(href='products.html')
-        | En savoir plus  
-        i.fa.fa-angle-double-right
+  main#order
+      h1 Commande
+      form#order-form(action='/confirmation', method='post')
+        section
+          h2 Contact
+          .row
+            .col
+              p
+                label(for='first-name') Prénom
+                input#first-name.form-control(minlength='2', type='text', name='first-name', placeholder='Prénom', required='')
+              p
+                label(for='email') Adresse courriel
+                input#email.form-control(type='email', name='email', placeholder='Adresse couriel', required='')
+            .col
+              p
+                label(for='last-name') Nom
+                input#last-name.form-control(minlength='2', type='text', name='last-name', placeholder='Nom', required='')
+              p
+                label(for='phone') Téléphone
+                input#phone.form-control(type='tel', name='phone', placeholder='###-###-####', required='')
+        section
+          h2 Paiement
+          .row
+            .col
+              p
+                label(for='credit-card') Numéro de carte de crédit
+                input#credit-card.form-control(type='password', name='credit-card', required='')
+            .col
+              p
+                label(for='credit-card-expiry') Date d’expiration de la carte
+                input#credit-card-expiry.form-control(name='credit-card-expiry', placeholder='MM/YY', required='')
+        .flex-right
+          button.btn.pull-right(type='/confirmation')
+            | Payer 
+            i.fa.fa-angle-double-right
 
 block scripts
   script(src='/assets/scripts/order.js')
