@@ -25,7 +25,7 @@ router.get("/commande", function(req, res) {
   res.render("order", { title: "Produit" });
 });
 
-router.get("/confirmation", function(req, res) {
+router.post("/confirmation", function(req, res) {
   res.render("confirmation", { title: "Produit" });
 });
 

@@ -31,7 +31,7 @@ var Order = (function(Cart){
         var firstname = $('#first-name').val(),
             lastname = $('#last-name').val();
         Cart.createCommand(firstname, lastname);
-        window.location = 'confirmation.html';
+        window.location = '/confirmation';
     }
     
     function validationAddMethods() {
