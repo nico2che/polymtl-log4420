@@ -9,6 +9,8 @@ var session = require("express-session");
 require("./lib/db");
 var index = require("./routes/front");
 var product = require("./routes/api/product");
+var shoppingcart = require("./routes/api/shopping-cart");
+var orders = require("./routes/api/orders");
 
 var app = express();
 
@@ -37,6 +39,8 @@ app.use(session({
 
 app.use("/", index);
 app.use("/api/", product);
+app.use("/api/", shoppingcart);
+app.use("/api/", orders);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

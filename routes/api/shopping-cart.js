@@ -3,7 +3,7 @@ var router = express.Router();
 
 // GEt all product in shopping cart
 router.get("/shopping-cart", function(req, res) {
-  res.json({});
+  res.json([req.session.cart]);
 });
 
 // Get product id = :productId in shopping-cart
