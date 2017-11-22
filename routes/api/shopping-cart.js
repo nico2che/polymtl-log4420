@@ -54,7 +54,8 @@ router.put("/shopping-cart/:productId", function(req, res) {
 // Delete product id = :productId in shopping cart
 router.delete("/shopping-cart/:productId", function(req, res) {
   const productId = _.toInteger(req.params.productId);
-  if (getProduct(req, productId)) { // If exists,  quantity
+  // Check sent parameters
+  if (getProduct(req, productId)) { // If exists, keep all other products
     req.session.cart = req.session.cart.filter(p => p.productId !== productId);
     res.status(204).send();
   } else { // Else, error not found!
@@ -64,6 +65,7 @@ router.delete("/shopping-cart/:productId", function(req, res) {
 
 // Delete all products in shopping cart
 router.delete("/shopping-cart", function(req, res) {
+  // Replace with empty array
   req.session.cart = [];
   res.status(204).send();
 });
