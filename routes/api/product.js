@@ -25,7 +25,7 @@ router.get("/products", (req, res) => {
     }
   }
   Product.find(query).sort(sort).exec((err, products) => {
-    if (err) console.error(err);
+    if (err) res.status(400).json({"error": err})
     res.json(products);
   })
 });
@@ -33,7 +33,7 @@ router.get("/products", (req, res) => {
 // Get product id = :id
 router.get("/products/:id", function(req, res) {
   Product.findOne({ id: req.params.id }).exec((err, product) => {
-    if (err) console.error(err);
+    if (err) res.status(400).json({"error": err})
     if (product)
       res.json(product);
     else

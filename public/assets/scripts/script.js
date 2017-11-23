@@ -1,6 +1,36 @@
 "use strict";
 
-const Cart = (function(){
+const Api = (function(){
+    
+    /**
+     * Constructor, called on `new Api()`
+     * @return {Api}
+     */
+    function Api(baseUrl = '/') {
+        this.options = {
+            baseUrl,
+            contentType: 'application/json',
+            dataType: 'JSON',
+            error: error => console.error(error)
+        };
+        return this;
+    }
+    
+    Api.prototype.request = function(method, url, data, error = this.options.error) {
+        return $.ajax({
+            ...this.options,
+            url: this.options.baseUrl + url,
+            type: method,
+            data: method !== 'get' ? JSON.stringify(data) : null,
+            error
+        });
+    }
+
+    return Api;
+
+})();
+
+const Cart = (function(Api){
 
     /**
      * Constructor, called on `new Cart()`
@@ -9,47 +39,65 @@ const Cart = (function(){
     function Cart() {
         // Products will be an object like
         // { idArticle : howMuch, ... }
-        const cart = localStorage.getItem('cart');
-        this.products = cart ? JSON.parse(cart) : {};
-        if(Object.keys(this.products).length) {
-            this.length = Object.values(this.products).reduce((p1, p2) => p1 + p2, 0);
-        } else {
-            this.length = 0;
-        }
-        this.updateCounter();
-        return this;
-    }
-
-    /**
-     * Add or remove specific article, x time
-     * @param {int} number 
-     * @param {int} article
-     * @return {Cart}
-     */
-    Cart.prototype.setProduct = function(number, article) {
-        number = parseInt(number);
-        this.products[article] = this.products[article] ? this.products[article] + number : number;
-        this.length += number;
-        this.updateCounter();
-        localStorage.setItem('cart', JSON.stringify(this.products));
+        Api.request('get', '/shopping-cart', null)
+            .done(products => {
+                this.products = products;
+                if(this.products.length) {
+                    this.length = this.products.reduce((acc, p) => acc + p.quantity, 0);
+                } else {
+                    this.length = 0;
+                }
+                this.updateCounter();
+            })
         return this;
     }
     
     /**
+     * Get quantity from a product
+     * @param {int} productId
+     * @return {int}
+     */
+    Cart.prototype.countProduct = function(productId) {
+        const [ product ] = this.products.filter(p => productId === p.productId);
+        console.log(product)
+        return product ? product.quantity : 0;
+    }
+
+    /**
+     * Add or remove specific article, x time, and return new quantity
+     * @param {int} quantity 
+     * @param {int} productId
+     * @return {int}
+     */
+    Cart.prototype.setProduct = function(quantity, productId) {
+        Api.request('post', '/shopping-cart', { productId, quantity })
+            .done(products => {
+                this.products = products;
+                this.length += parseInt(quantity);
+                this.updateCounter();
+                return this.countProduct(productId);
+            });
+    }
+    
+    /**
      * Remove all specific article
-     * @param {int} article 
+     * @param {int} productId 
      * @return boolean
      */
-    Cart.prototype.removeProduct = function(article) {
-        if(this.products[article]) {
-            this.length -= this.products[article];
-            this.updateCounter();
-            delete this.products[article];
-            localStorage.setItem('cart', JSON.stringify(this.products)); // Save
-            return true;
-        } else {
-            return false;
-        }
+    Cart.prototype.removeProduct = function(productId) {
+        Api.request('delete', '/shopping-cart/' + productId)
+            .done(() => {
+                const [product] = this.products.filter(p => p.productId === productId);
+                console.log(product)
+                if(product) {
+                    this.length -= product.quantity;
+                    this.updateCounter();
+                    this.products = this.products.filter(p => p.productId !== productId);
+                    return true;
+                } else {
+                    return false;
+                }
+            });
     }
         
     /**
@@ -57,10 +105,12 @@ const Cart = (function(){
      * @return void
      */
     Cart.prototype.removeAllProducts = function() {
-        this.length = 0;
-        this.products = {};
-        this.updateCounter();
-        localStorage.removeItem('cart');
+        Api.request('delete', '/shopping-cart')
+            .done(() => {
+                this.length = 0;
+                this.products = [];
+                this.updateCounter();
+            })
     }
     
     /**
@@ -101,7 +151,8 @@ const Cart = (function(){
     }
 
     return Cart;
-})();
+
+})(new Api('/api'));
 
 /**
  * Initialize Cart on all pages to update menu counter

@@ -21,13 +21,16 @@ router.get("/shopping-cart/:productId", function(req, res) {
 
 // Add a product in shopping cart
 router.post("/shopping-cart/", function(req, res) {
-  const { productId, quantity } = req.body;
+  const productId = _.toInteger(req.body.productId)
+        , quantity = _.toInteger(req.body.quantity);
+  console.log(quantity, productId)
   // Check sent parameters
-  if (_.isInteger(productId) && _.isInteger(quantity)) {
+  if (quantity && productId) {
     if (getProduct(req, productId)) // If exists, increment it
       req.session.cart = req.session.cart.map(p => p.productId === productId ? { productId, quantity: quantity + p.quantity } : p);
     else // Else, create it
       req.session.cart = (req.session.cart || []).concat({ productId, quantity })
+    console.log(req.session.cart)
     res.json(req.session.cart); // new cart
   } else {
     res.status(400).send(); // error in parameters
@@ -36,10 +39,10 @@ router.post("/shopping-cart/", function(req, res) {
 
 // Update quantity product :productId in shopping cart
 router.put("/shopping-cart/:productId", function(req, res) {
-  const productId = _.toInteger(req.params.productId);
-  const { quantity } = req.body;
+  const productId = _.toInteger(req.params.productId)
+        , quantity = _.toInteger(req.body.quantity);
   // Check sent parameters
-  if (_.isInteger(quantity)) {
+  if (quantity && productId) {
     if (getProduct(req, productId)) { // If exists, replace quantity
       req.session.cart = req.session.cart.map(p => p.productId === productId ? { productId, quantity } : p);
       res.status(204).send();
