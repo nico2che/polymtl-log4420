@@ -73,7 +73,7 @@ header nav > a.active {
 	color: #fff;
 	bottom: -6px;
 	min-width: 14px;
-	right: -5px;
+	right: 8px;
 	border-radius: 9px;
 	font-size: 12px;
 	height: 16px;
@@ -207,6 +207,7 @@ footer {
 	padding-right:20px;
 }
 #sidebar > div > button {
+	border-radius: 0; /* prevent default radius browser on button */
 	padding: 10px;
 	background-color: white;
 	border: solid #999999;
