@@ -2,11 +2,11 @@ var express = require("express");
 var router = express.Router();
 
 router.get(/^\/(accueil)?$/, function(req, res) {
-  res.render("index");
+  res.render("index"), { title: "Accueil" };
 });
 
 router.get("/contact", function(req, res) {
-  res.render("contact", { title: "Produit" });
+  res.render("contact", { title: "Contact" });
 });
 
 router.get("/produits", function(req, res) {
@@ -18,15 +18,15 @@ router.get("/produit", function(req, res) {
 });
 
 router.get("/panier", function(req, res) {
-  res.render("shopping-cart", { title: "Produit" });
+  res.render("shopping-cart", { title: "Panier" });
 });
 
 router.get("/commande", function(req, res) {
-  res.render("order", { title: "Produit" });
+  res.render("order", { title: "Commande" });
 });
 
 router.get("/confirmation", function(req, res) {
-  res.render("confirmation", { title: "Produit" });
+  res.render("confirmation", { title: "Confirmation de commande" });
 });
 
 
