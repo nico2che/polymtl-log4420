@@ -131,7 +131,7 @@ const Cart = (function(Api){
     Cart.prototype.getCommands = function() {
         return Api.request('get', '/orders');
     }
-    
+
     /**
      * Update top right corner product counter with products length
      * @return void
@@ -141,6 +141,19 @@ const Cart = (function(Api){
             $('.shopping-cart .count').html(this.length).show()
             : $('.shopping-cart .count').hide();
     }
+
+    //selected tab
+    var url = window.location.pathname;
+    $("nav a").each(function(index) {
+        $(this).removeClass('active');
+        if(url === ($(this).attr('href')) && url != '/panier'){
+            $(this).addClass('active');
+        }
+
+        console.log( index + ": " + $(this).text());
+      });
+
+
 
     return Cart;
 
