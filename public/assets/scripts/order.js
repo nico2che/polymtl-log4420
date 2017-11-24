@@ -28,10 +28,14 @@ var Order = (function(Cart){
     }
 
     function onSubmit() {
-        var firstname = $('#first-name').val(),
-            lastname = $('#last-name').val();
-        Cart.createCommand(firstname, lastname);
-        window.location = '/confirmation';
+        var firstName = $('#first-name').val(),
+            lastName = $('#last-name').val(),
+            email = $('#email').val(),
+            phone = $('#phone').val();
+        Cart.createCommand({ firstName, lastName, email, phone })
+            .then(() => {
+                window.location = '/confirmation';
+            })
     }
     
     function validationAddMethods() {
