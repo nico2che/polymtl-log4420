@@ -10,11 +10,11 @@ var Product = (function(Cart){
         if(id && id[1]) { // Check if id exists
             $.get('/api/products/' + id[1], data => {
                 article = data;
-                if(article)
-                    displayProduct();
-                else
-                    productNotFound();
+                displayProduct();
             }, 'JSON')
+                .fail(() => {
+                    productNotFound();
+                })
         } else {
             productNotFound();
         }

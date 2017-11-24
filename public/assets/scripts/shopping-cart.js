@@ -1,14 +1,15 @@
 "use strict";
 
-var ShoppingCart = (function(Cart){
+var ShoppingCart = ((Cart) => {
 
     function init() {
-        console.log(Cart.length)
-        if (Cart.length === 0) {
-            hideTable();
-        } else {
-            loadTable();
-        }
+        Cart.init().then(() => {
+            if (Cart.length === 0) {
+                hideTable();
+            } else {
+                loadTable();
+            }
+        })
     }
 
     function loadTable() {
@@ -69,10 +70,7 @@ var ShoppingCart = (function(Cart){
             var id = row.data('id');
             Cart.removeProduct(id); // Update menu cart and storage
             row.remove(); // Update table
-            if(Cart.length === 0)
-                hideTable(); // Hide table if no product anymore
-            else
-                updateTotal(); // Update total amount
+            updateTotal(); // Update total amount
         }
     }
 
@@ -87,9 +85,11 @@ var ShoppingCart = (function(Cart){
         var totalAmount = 0;
         $('tbody tr').each(function(){
             var price = parseFloat($(this).data('price'));
-            totalAmount += price * Cart.countProduct($(this).data('id'));
+            totalAmount += price * parseFloat($(this).find('.quantity').html());
         });
         $('#total-amount').html(formatPrice(totalAmount));
+        if (totalAmount === 0)
+            hideTable();
     }
 
     function hideTable() {
