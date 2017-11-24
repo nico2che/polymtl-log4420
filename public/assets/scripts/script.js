@@ -142,22 +142,20 @@ const Cart = (function(Api){
             : $('.shopping-cart .count').hide();
     }
 
-    //selected tab
-    var url = window.location.pathname;
-    $("nav a").each(function(index) {
-        $(this).removeClass('active');
-        if(url === ($(this).attr('href')) && url != '/panier'){
-            $(this).addClass('active');
-        }
-
-        console.log( index + ": " + $(this).text());
-      });
-
-
-
     return Cart;
 
 })(new Api('/api'));
+
+(() => {
+    // selected menu
+    var url = window.location.pathname;
+    $("nav a").each(function(index) {
+        $(this).removeClass('active');
+        if (url === ($(this).attr('href')) && url !== '/panier') {
+            $(this).addClass('active');
+        }
+    });
+})()
 
 /**
  * Initialize Cart on all pages to update menu counter
