@@ -9,14 +9,7 @@ var Products = (function(){
 
     function init() {
         // Get all products
-        $.get('/api/products', function(data) {
-             // Sort received data with custom function
-            articles = data.sort(function(p1, p2) {
-                return orderBy === 'asc' ? p1[criteria] - p2[criteria] : p2[criteria] - p1[criteria];
-            });
-            displayProducts(articles);
-            $('#products-count').html(articles.length + ' produits');
-        }, 'JSON');
+        getArticles();
         $('#product-categories > button').on('click', sortCategory); // Category buttons event
         $('#product-criteria > button').on('click', sortCriteria); // Criteria buttons event
     }
@@ -27,11 +20,8 @@ var Products = (function(){
         $(this).addClass('selected');
         // Update new category
         category = $(this).data('category');
-        // Get articles
-        var articleSorted = articles.filter(function(article){
-            return category === '' || article.category === category;
-        });
-        displayProducts(articleSorted);
+        // Apply it
+        getArticles();
     }
 
     function sortCriteria() {
@@ -42,16 +32,16 @@ var Products = (function(){
         criteria = $(this).data('criteria');
         orderBy = $(this).data('order');
         // Apply them
-        $('#products-list a').sort(function(p1, p2) {
-            // Sort conditions
-            if(orderBy === 'asc')
-                return $(p1).data(criteria) > $(p2).data(criteria) ? 1 : -1;
-            else
-                return $(p1).data(criteria) < $(p2).data(criteria) ? 1 : -1;
-        }).each(function(){
-            // Reorder articles
-            $('#products-list').append($(this))
-        })
+        getArticles();
+    }
+
+    function getArticles() {
+        $.ajax({
+            url: '/api/products',
+            type: 'GET',
+            dataType: 'JSON',
+            data: { criteria, orderBy, category }
+        }).done(articles => displayProducts(articles));
     }
 
     function displayProducts(articles) {
