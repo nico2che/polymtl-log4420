@@ -32,14 +32,16 @@ const Api = (function(){
 
 const Cart = (function(Api){
 
-    /**
-     * Constructor, called on `new Cart()`
-     * @return {Cart}
-     */
     function Cart() {
-        // Products will be an object like
-        // { idArticle : howMuch, ... }
-        Api.request('get', '/shopping-cart', null)
+        return this;
+    }
+
+    /**
+     * init function, called first
+     * @return void
+     */
+    Cart.prototype.init = function() {
+        return Api.request('get', '/shopping-cart', null)
             .done(products => {
                 this.products = products;
                 if(this.products.length) {
@@ -49,7 +51,6 @@ const Cart = (function(Api){
                 }
                 this.updateCounter();
             })
-        return this;
     }
     
     /**
@@ -59,7 +60,6 @@ const Cart = (function(Api){
      */
     Cart.prototype.countProduct = function(productId) {
         const [ product ] = this.products.filter(p => productId === p.productId);
-        console.log(product)
         return product ? product.quantity : 0;
     }
 
@@ -105,39 +105,31 @@ const Cart = (function(Api){
      * @return void
      */
     Cart.prototype.removeAllProducts = function() {
-        Api.request('delete', '/shopping-cart')
+        return Api.request('delete', '/shopping-cart')
             .done(() => {
                 this.length = 0;
                 this.products = [];
                 this.updateCounter();
             })
     }
-    
+
     /**
      * Create command with all products and remove them from cart
-     * @param firstname Shopper firstname
-     * @param lastname Shopper lastname
+     * @param order Shopper infos
      * @return void
      */
-    Cart.prototype.createCommand = function(firstname, lastname) {
-        var commands = localStorage.getItem('commands');
-        if (commands) {
-            commands = JSON.parse(commands);
-            commands = { id: ++commands.id, firstname, lastname };
-        } else {
-            commands = { id: 1, firstname, lastname };
-        }
-        localStorage.setItem('commands', JSON.stringify(commands));
-        this.removeAllProducts();
+    Cart.prototype.createCommand = function(order) {
+        return Api.request('get', '/shopping-cart')
+                    .then(products => Api.request('post', '/orders', { ...order, products }))
+                    .then(() => this.removeAllProducts())
     }
     
     /**
      * Get the last command created
      * @return {Object} last command
      */
-    Cart.prototype.getLastCommand = function() {
-        let commands = localStorage.getItem('commands');
-        return commands ? JSON.parse(commands) : {};
+    Cart.prototype.getCommands = function() {
+        return Api.request('get', '/orders');
     }
     
     /**
@@ -158,6 +150,7 @@ const Cart = (function(Api){
  * Initialize Cart on all pages to update menu counter
  */
 const cart = new Cart;
+cart.init()
 
 function formatPrice(price) {
     return price.toFixed(2).toString().replace('.', ',');
