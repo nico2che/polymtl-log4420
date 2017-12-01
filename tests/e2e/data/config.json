@@ -7,7 +7,7 @@
     }
   },
   "product": {
-    "url": "produit?id=",
+    "url": "produits/",
     "elements": {
       "name": "#product-name",
       "image": "#product-image",

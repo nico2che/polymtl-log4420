@@ -66,7 +66,7 @@ module.exports = {
       var request = require("request");
 
       // Delete all the orders in the database.
-      request.delete("http://localhost:8000/api/orders", function(err, response) {
+      request.delete("http://localhost:3000/api/orders", function(err, response) {
         if (err || response.statusCode !== 204) {
           client.assert.fail("Une erreur est survenue lors de la suppression des commandes avec l'API.");
         }
@@ -151,7 +151,7 @@ module.exports = {
     client.assert.hidden(shoppingCartConfig.elements.count,
       "Le nombre de produits dans le panier ne doit pas être visible lorsque le panier est vide.");
 
-    client.reqGet("http://localhost:8000/api/orders", function(err, orders) {
+    client.reqGet("http://localhost:3000/api/orders", function(err, orders) {
       if (!err && orders) {
        client.assert.equal(orders.length, 1, "Une commande se trouve dans la base de données.");
       }

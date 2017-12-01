@@ -4,13 +4,13 @@ module.exports = {
     var productsList = require("./data/products.json");
 
     // Deletes all the products in the database.
-    request.delete("http://localhost:8000/api/products", function(err, response) {
+    request.delete("http://localhost:3000/api/products", function(err, response) {
       if (!err && response.statusCode === 204) {
         productsList.forEach(function(product, i) {
           // Creates a new product in the database.
           request.post({
             headers: { "content-type": "application/json" },
-            url: "http://localhost:8000/api/products",
+            url: "http://localhost:3000/api/products",
             json: product
           }, function(err, response){
             if (!err && response.statusCode === 201) {

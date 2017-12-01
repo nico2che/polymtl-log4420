@@ -20,7 +20,7 @@ function validateShoppingCartQuantity(client, expectedQuantity) {
       "Le nombre de produits dans le panier ne doit pas être visible lorsque le panier est vide.");
   } else {
     client.assert.visible(shoppingCartConfig.elements.count,
-      "Le nombre de produits dans le panier doit pas être visible.");
+      "Le nombre de produits dans le panier doit être visible.");
     client.assert.containsText(shoppingCartConfig.elements.count, expectedQuantity,
       "Le nombre de produits dans le panier doit être de '" + expectedQuantity + "'.");
   }
@@ -61,12 +61,7 @@ module.exports = {
     client.url("http://localhost:8000/" + config.url + randomInvalidId)
       .waitForUpdate()
       .assert.containsText("h1", "Page non trouvée!",
-        "Lorsqu'un identifiant invalide est spécifié à la page d'un produit, le titre doit indiquer 'Page non trouvée!'.")
-      .execute(function() {
-        return document.querySelector("h1").parentNode.children.length;
-      }, [], function(result) {
-        client.assert.equal(result.value, 1, "Le contenu principal de la page doit contenir uniquement un titre.");
-      });
+        "Lorsqu'un identifiant invalide est spécifié à la page d'un produit, le titre doit indiquer 'Page non trouvée!'.");
   },
   "Ajout de produits dans le panier": function(client) {
     var randomId = utils.getRandomIntInclusive(1, productsList.length);

@@ -91,7 +91,7 @@ function validateShoppingCartTable(client, productsList) {
     });
   });
   client.assert.visible(config.elements.count,
-    "Le nombre de produits dans le panier doit pas être visible.");
+    "Le nombre de produits dans le panier doit être visible.");
 
   var quantity = productsList.reduce(function(sum, product) {
     return sum + product.quantity;
@@ -115,28 +115,6 @@ function validateTotalAmount(client, productsList) {
   expectedTotalAmount = utils.getFormattedPrice(expectedTotalAmount);
   client.verify.containsText(config.elements.totalAmount, expectedTotalAmount,
     "Le total doit être '" + expectedTotalAmount + "$'.");
-}
-
-/**
- * Validates if the shopping cart is valid in the API.
- *
- * @param client        The client to use.
- * @param productsList  The expected list to use.
- */
-function validateShoppingCartWithAPI(client, productsList) {
-  client.reqGet("http://localhost:8000/api/shopping-cart", function(err, response) {
-    if (!err) {
-      var isValid = productsList.length === 0 || response.length === productsList.length &&
-        response.every(function(item) {
-          return productsList.find(function(product) {
-              return product.id === item.productId && item.quantity === product.quantity;
-            }) !== undefined;
-        });
-      client.assert.ok(isValid, "Les items se trouvant dans le panier d'achats via l'API sont corrects. ");
-    } else {
-      client.fail("L'API du panier d'achats indique une erreur.")
-    }
-  });
 }
 
 module.exports = {
@@ -191,7 +169,6 @@ module.exports = {
     client.url("http://localhost:8000/" + config.url)
       .waitForUpdate();
 
-    validateShoppingCartWithAPI(client, expectedProducts);
     validateShoppingCartTable(client, expectedProducts);
     validateTotalAmount(client, expectedProducts);
   },
@@ -217,7 +194,6 @@ module.exports = {
 
       // Check if the item was deleted.
       client.waitForUpdate();
-      validateShoppingCartWithAPI(client, expectedProducts);
       validateShoppingCartTable(client, expectedProducts);
       validateTotalAmount(client, expectedProducts);
     });
@@ -227,7 +203,6 @@ module.exports = {
       console.log("Le bouton permettant d'augmenter la quantité pour le produit #1 a été cliqué...");
       expectedProducts[0].quantity += 1;
       client.waitForUpdate();
-      validateShoppingCartWithAPI(client, expectedProducts);
       validateShoppingCartTable(client, expectedProducts);
       validateTotalAmount(client, expectedProducts);
     });
@@ -237,7 +212,6 @@ module.exports = {
       console.log("Le bouton permettant de diminuer la quantité pour le produit #1 a été cliqué...");
       expectedProducts[0].quantity -= 1;
       client.waitForUpdate();
-      validateShoppingCartWithAPI(client, expectedProducts);
       validateShoppingCartTable(client, expectedProducts);
       validateTotalAmount(client, expectedProducts);
     });
@@ -259,7 +233,6 @@ module.exports = {
     pressRemoveAllItemsButton().acceptAlert(function () {
       console.log("La suppression a été acceptée.");
       client.waitForUpdate();
-      validateShoppingCartWithAPI(client, []);
       validateEmptyShoppingCartView(client)
     });
     client.end();
