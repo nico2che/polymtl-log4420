@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Product } from "./products.service";
 
 /**
  * Defines the main component of the application.
@@ -14,5 +15,5 @@ export class AppComponent {
     'Pierre Terroitin'
   ];
 
-  // TODO: À compléter
+  cart: Product[];
 }
