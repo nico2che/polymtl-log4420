@@ -17,7 +17,7 @@
   </section>
 </section>
 <article>
-  <span class="right-header" id="products-count">{{products.length}} produits</span>
+  <span class="right-header" id="products-count">{{products ? products.length : 0}} produits</span>
   <h1>Produits</h1>
   <div class="products" id="products-list">
     <div class="product" *ngFor="let product of products">
