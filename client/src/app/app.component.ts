@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Product } from "./products.service";
+import { ProductsService, Product } from "./products.service";
+import { ShoppingCartService, ShoppingCart } from "./shopping-cart.service";
 
 /**
  * Defines the main component of the application.
@@ -10,10 +11,19 @@ import { Product } from "./products.service";
 })
 export class AppComponent {
 
+  constructor(private shoppingCartService: ShoppingCartService) {}
+
   readonly authors = [
     'Nicolas de Chevigné',
     'Pierre Terroitin'
   ];
 
-  cart: Product[];
+  shoppingCart: ShoppingCart[];
+
+  ngOnInit() {
+    this.shoppingCartService
+      .getShoppingCart()
+      .then(products => this.shoppingCart = products);
+  }
+
 }
