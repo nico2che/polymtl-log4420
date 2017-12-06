@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService, Product } from "../products.service";
+import { ShoppingCart, ShoppingCartService } from "../shopping-cart.service";
 
 /**
  * Defines the component responsible to manage the product page.
@@ -17,14 +18,26 @@ export class ProductComponent implements OnInit {
    * @param route                   The active route.
    * @param productService          Products API Service Injected
    */
-  constructor(private route: ActivatedRoute, private productService: ProductsService) { }
+  constructor(private route: ActivatedRoute,
+              private productService: ProductsService,
+              private shoppingCartService: ShoppingCartService) { }
 
   product: Product;
+  quantity: number;
 
   getProduct(id: number): void {
     this.productService
       .getProduct(id)
       .then(product => this.product = product);
+  }
+
+  addItem() {
+    const exists = this.shoppingCartService.items.filter(p => p.productId === this.product.id).length;
+    if (!exists) {
+      this.shoppingCartService.addItem(this.product.id, this.quantity);
+    } else {
+      this.shoppingCartService.updateItem(this.product.id, this.quantity);
+    }
   }
 
   /**
@@ -33,6 +46,6 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
     const productId = this.route.snapshot.paramMap.get('id');
     this.getProduct(parseInt(productId));
-    // TODO: Compléter la logique pour afficher le produit associé à l'identifiant spécifié (productId).
+    this.quantity = 1;
   }
 }
