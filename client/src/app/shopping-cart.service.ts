@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 import { Config } from './config';
-import { Product } from "./products.service";
 
 /**
  * Defines a product.
  */
 export class ShoppingCart  {
-  id: number;
   productId: number;
   quantity: number;
 }
+
+const headers = new Headers({ 'Content-Type': 'application/json' });
+// ***** Il est nécessaire de mettre la propriété "withCredientials" à TRUE. *****
+const options = new RequestOptions({ headers, withCredentials: true });
 
 /**
  * Defines the service responsible to create and retrieve the orders in the database.
@@ -36,20 +38,43 @@ export class ShoppingCartService {
    */
   constructor(private http: Http) {}
 
-  getShoppingCart(): Promise<ShoppingCart[]> {
+  items: ShoppingCart[];
+
+  getCounter():number {
+    return this.items ? this.items.reduce((i, p) => i + p.quantity, 0) : 0;
+  }
+
+  getItems(): Promise<ShoppingCart[]> {
     let url = `${Config.apiUrl}/shopping-cart/`;
-    return this.http.get(url)
+    return this.http.get(url, options)
       .toPromise()
-      .then(products => products.json() as ShoppingCart[])
+      .then(products => this.items = products.json() as ShoppingCart[])
       .catch(ShoppingCartService.handleError);
   }
 
-  addProduct(productId: number, quantity: number): Promise<any> {
+  addItem(productId: number, quantity: number): void {
+    // Update local ShoppingCart
+    this.items.push({ productId, quantity });
+    // Update server
     let url = `${Config.apiUrl}/shopping-cart/`;
-    return this.http.post(url, JSON.stringify({
+    this.http.post(url, JSON.stringify({
       productId,
       quantity
-    }))
+    }), options)
+      .toPromise()
+      .catch(ShoppingCartService.handleError);
+  }
+
+  updateItem(productId: number, quantity: number): void {
+    // Update local quantity
+    const i = this.items.findIndex(p => p.productId === productId);
+    this.items[i].quantity += quantity;
+    console.log(this.items);
+    // Update server
+    let url = `${Config.apiUrl}/shopping-cart/${productId}`;
+    this.http.put(url, JSON.stringify({
+      quantity: this.items[i].quantity
+    }), options)
       .toPromise()
       .catch(ShoppingCartService.handleError);
   }
