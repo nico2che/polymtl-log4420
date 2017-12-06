@@ -24,28 +24,30 @@ export class ProductComponent implements OnInit {
 
   product: Product;
   quantity: number;
+  dialog: boolean = false;
 
-  getProduct(id: number): void {
-    this.productService
-      .getProduct(id)
-      .then(product => this.product = product);
+  async getProduct(id: number) {
+    this.product = await this.productService.getProduct(id);
   }
 
-  addItem() {
+  async addItem() {
+    this.dialog = true;
     const exists = this.shoppingCartService.items.filter(p => p.productId === this.product.id).length;
     if (!exists) {
-      this.shoppingCartService.addItem(this.product.id, this.quantity);
+      await this.shoppingCartService.addItem(this.product.id, this.quantity);
     } else {
-      this.shoppingCartService.updateItem(this.product.id, this.quantity);
+      await this.shoppingCartService.updateItem(this.product.id, this.quantity);
     }
+    await new Promise(r => setTimeout(r, 5000));
+    this.dialog = false;
   }
 
   /**
    * Occurs when the component is initialized.
    */
-  ngOnInit() {
+  async ngOnInit() {
     const productId = this.route.snapshot.paramMap.get('id');
-    this.getProduct(parseInt(productId));
+    await this.getProduct(parseInt(productId));
     this.quantity = 1;
   }
 }

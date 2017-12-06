@@ -52,12 +52,12 @@ export class ShoppingCartService {
       .catch(ShoppingCartService.handleError);
   }
 
-  addItem(productId: number, quantity: number): void {
+  addItem(productId: number, quantity: number): Promise<any> {
     // Update local items
     this.items.push({ productId, quantity });
     // Update server
     let url = `${Config.apiUrl}/shopping-cart/`;
-    this.http.post(url, JSON.stringify({
+    return this.http.post(url, JSON.stringify({
       productId,
       quantity
     }), options)
@@ -65,13 +65,13 @@ export class ShoppingCartService {
       .catch(ShoppingCartService.handleError);
   }
 
-  updateItem(productId: number, quantity: number): void {
+  updateItem(productId: number, quantity: number): Promise<any> {
     // Update local quantity
     const i = this.items.findIndex(p => p.productId === productId);
     this.items[i].quantity += quantity;
     // Update server
     let url = `${Config.apiUrl}/shopping-cart/${productId}`;
-    this.http.put(url, JSON.stringify({
+    return this.http.put(url, JSON.stringify({
       quantity: this.items[i].quantity
     }), options)
       .toPromise()
