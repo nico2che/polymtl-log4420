@@ -11,19 +11,19 @@ import { ShoppingCartService, ShoppingCart } from "./shopping-cart.service";
 })
 export class AppComponent {
 
-  constructor(private shoppingCartService: ShoppingCartService) {}
-
   readonly authors = [
     'Nicolas de Chevigné',
     'Pierre Terroitin'
   ];
 
-  shoppingCart: ShoppingCart[];
+  constructor(private shoppingCartService: ShoppingCartService) {
+    this.counter = shoppingCartService;
+  }
 
-  ngOnInit() {
-    this.shoppingCartService
-      .getShoppingCart()
-      .then(products => this.shoppingCart = products);
+  counter;
+
+  async ngOnInit() {
+    await this.shoppingCartService.getItems();
   }
 
 }
