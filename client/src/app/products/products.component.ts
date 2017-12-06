@@ -9,7 +9,7 @@ const MENU_SORTING = [
 ];
 
 const MENU_CATEGORY = [
-  { action: 'cameras', name: 'Caméras' },
+  { action: 'cameras', name: 'Appareils photo' },
   { action: 'consoles', name: 'Consoles' },
   { action: 'screens', name: 'Écrans' },
   { action: 'computers', name: 'Ordinateurs' },
