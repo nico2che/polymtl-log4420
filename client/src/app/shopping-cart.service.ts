@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { Config } from './config';
+import {Product, ProductsService} from "./products.service";
 
 /**
  * Defines a product.
@@ -11,7 +12,6 @@ export class ShoppingCart  {
 }
 
 const headers = new Headers({ 'Content-Type': 'application/json' });
-// ***** Il est nécessaire de mettre la propriété "withCredientials" à TRUE. *****
 const options = new RequestOptions({ headers, withCredentials: true });
 
 /**
@@ -36,7 +36,7 @@ export class ShoppingCartService {
    *
    * @param http                    The HTTP service to use.
    */
-  constructor(private http: Http) {}
+  constructor(private http: Http, private productService: ProductsService) {}
 
   items: ShoppingCart[];
 
@@ -53,7 +53,7 @@ export class ShoppingCartService {
   }
 
   addItem(productId: number, quantity: number): void {
-    // Update local ShoppingCart
+    // Update local items
     this.items.push({ productId, quantity });
     // Update server
     let url = `${Config.apiUrl}/shopping-cart/`;
@@ -69,12 +69,31 @@ export class ShoppingCartService {
     // Update local quantity
     const i = this.items.findIndex(p => p.productId === productId);
     this.items[i].quantity += quantity;
-    console.log(this.items);
     // Update server
     let url = `${Config.apiUrl}/shopping-cart/${productId}`;
     this.http.put(url, JSON.stringify({
       quantity: this.items[i].quantity
     }), options)
+      .toPromise()
+      .catch(ShoppingCartService.handleError);
+  }
+
+  deleteItem(product: Product): void {
+    // Update local items
+    this.items = this.items.filter(item => item.productId !== product.id);
+    // Update server
+    let url = `${Config.apiUrl}/shopping-cart/${product.id}`;
+    this.http.delete(url, options)
+      .toPromise()
+      .catch(ShoppingCartService.handleError);
+  }
+
+  deleteAllItem(): void {
+    // Update local items
+    this.items = [];
+    // Update server
+    let url = `${Config.apiUrl}/shopping-cart/`;
+    this.http.delete(url, options)
       .toPromise()
       .catch(ShoppingCartService.handleError);
   }
