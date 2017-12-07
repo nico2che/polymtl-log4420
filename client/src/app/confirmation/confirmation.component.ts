@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Order, OrdersService } from "../orders.service";
 
 /**
 * Defines the component responsible to manage the confirmation page.
@@ -8,5 +9,13 @@ import { Component } from '@angular/core';
   templateUrl: './confirmation.component.html'
 })
 export class ConfirmationComponent {
-  // TODO: À compléter
+
+  constructor(private orderService: OrdersService) {}
+
+  order: Order;
+
+  async ngOnInit() {
+    const orders: Order[] = await this.orderService.getOrders();
+    this.order = orders.length ? orders[orders.length - 1] : undefined;
+  }
 }
