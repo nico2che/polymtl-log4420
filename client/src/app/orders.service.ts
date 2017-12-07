@@ -15,6 +15,7 @@ export class Order  {
   products: object;
 }
 
+// Required headers to each server requests
 const headers = new Headers({ 'Content-Type': 'application/json' });
 const options = new RequestOptions({ headers, withCredentials: true });
 
@@ -39,10 +40,16 @@ export class OrdersService {
    * Initializes a new instance of the OrdersService class.
    *
    * @param http                    The HTTP service to use.
+   * @param shoppingCartService     ShoppingCart API Service Injected
    */
   constructor(private http: Http,
               private shoppingCartService: ShoppingCartService) {}
 
+  /**
+   * Get all orders from the server
+   *
+    * @returns {Promise<Order[]>}
+   */
   getOrders(): Promise<Order[]> {
     let url = `${Config.apiUrl}/orders/`;
     return this.http.get(url, options)
@@ -51,6 +58,12 @@ export class OrdersService {
       .catch(OrdersService.handleError);
   }
 
+  /**
+   * Create a new order on the server and delete all items from the cart
+   *
+   * @param {Order} order
+   * @returns {Promise<any>}
+   */
   createOrder(order: Order) {
     let url = `${Config.apiUrl}/orders/`;
     return this.http.post(url, JSON.stringify(order), options)

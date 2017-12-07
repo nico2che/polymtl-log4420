@@ -26,7 +26,11 @@ const MENU_CATEGORY = [
 })
 export class ProductsComponent {
 
-  // Service Injection
+  /**
+   * Initializes a new instance of the ProductsComponent class.
+   *
+   * @param productService   Products API Service Injected
+   */
   constructor(private productService: ProductsService) {}
 
   // List of products
@@ -40,26 +44,36 @@ export class ProductsComponent {
   sortingCriteria = 'price-asc';
   category = 'all';
 
-  // Sort products
+  /**
+   * Sort products by a criteria (price-asc, price-dsc, alpha-asc, alpha-dsc)
+   * @param {string} sortingCriteria            The criteria to apply
+   */
   setSorting(sortingCriteria: string) {
     this.sortingCriteria = sortingCriteria;
     this.getProducts();
   }
 
-  // Display product category
+  /**
+   * Filter products by a category
+   * @param {string} category                   The category to apply
+   */
   setCategory(category: string) {
     this.category = category;
     this.getProducts();
   }
 
-  // Get all filtered and sorted products from ProductService
+  /**
+   * Get all products from the server, with current criteria and category selection
+   */
   getProducts(): void {
     this.productService
       .getProducts(this.sortingCriteria, this.category)
       .then(products => this.products = products);
   }
 
-  // On init, get products
+  /**
+   * Get all products on start
+   */
   ngOnInit(): void {
     this.getProducts();
   }

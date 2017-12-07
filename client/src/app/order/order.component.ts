@@ -16,12 +16,20 @@ export class OrderComponent implements OnInit {
   orderForm: any;
   order: Order = new Order();
 
+  /**
+   * Initializes a new instance of the OrderComponent class.
+   *
+   * @param router                Router Angular Module
+   * @param shoppingCartService   ShoppingCart API Service Injected
+   * @param orderService          Order API Service Injected
+   */
   constructor(private router: Router,
               private shoppingCartService: ShoppingCartService,
               private orderService: OrdersService) {}
 
   /**
    * Occurs when the component is initialized.
+   * Protect the form, and prepare Order information with new id and current cart
    */
   async ngOnInit() {
     // Initializes the validation of the form. This is the ONLY place where jQuery usage is allowed.
@@ -60,9 +68,9 @@ export class OrderComponent implements OnInit {
 
   /**
    * Submits the order form.
+   * Create new order if form is valid and redirect to the confirmation page
    */
   async submit() {
-    console.log(this.order)
     if (!this.orderForm.valid()) {
       return;
     }
