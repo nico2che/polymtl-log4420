@@ -5,7 +5,7 @@
 OnlineShop is an Angular 4 application created in 2 students team at Polytechnique de
 Montréal
 
-This website was started from ex nihilo in 6 practical works
+This website was started ex nihilo in 6 practical works
 
 https://moodle.polymtl.ca/course/view.php?id=326
 
