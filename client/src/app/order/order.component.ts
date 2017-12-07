@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Order, OrdersService } from "../orders.service";
+import { ShoppingCartService } from "../shopping-cart.service";
+import { Router } from "@angular/router";
 declare const $: any;
 
 /**
@@ -11,11 +14,16 @@ declare const $: any;
 export class OrderComponent implements OnInit {
 
   orderForm: any;
+  order: Order = new Order();
+
+  constructor(private router: Router,
+              private shoppingCartService: ShoppingCartService,
+              private orderService: OrdersService) {}
 
   /**
    * Occurs when the component is initialized.
    */
-  ngOnInit() {
+  async ngOnInit() {
     // Initializes the validation of the form. This is the ONLY place where jQuery usage is allowed.
     this.orderForm = $('#order-form');
     $.validator.addMethod('ccexp', function(value) {
@@ -40,15 +48,27 @@ export class OrderComponent implements OnInit {
         }
       }
     });
+    // Get all orders
+    const orders: Order[] = await this.orderService.getOrders();
+    // Get last order ++id, otherwise 1 to start
+    this.order.id = orders.length ? ++orders[orders.length - 1].id : 1;
+    // Get all current items in shopping cart
+    const items = await this.shoppingCartService.getItems();
+    // Redefine items to send them to the server
+    this.order.products = items.map(({ productId: id, quantity }) => ({ id, quantity }));
   }
 
   /**
    * Submits the order form.
    */
-  submit() {
+  async submit() {
+    console.log(this.order)
     if (!this.orderForm.valid()) {
       return;
     }
-    // TODO: Compléter la soumission des informations lorsque le formulaire soumis est valide.
+    // OK, form was valid, send order to create it
+    await this.orderService.createOrder(this.order);
+    // Wait and go to confirmation page
+    this.router.navigate(['/confirmation']);
   }
 }
