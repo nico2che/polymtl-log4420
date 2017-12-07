@@ -9,7 +9,7 @@ This website was started from ex nihilo in 6 practical works
 
 https://moodle.polymtl.ca/course/view.php?id=326
 
-### PW 1 - 2 - 3
+### (PW 1 - 2 - 3)[https://github.com/nico2che/polymtl-log4420/tree/tp-1-2-3]
 
 1. Write HTML
 2. Write CSS
@@ -17,7 +17,7 @@ https://moodle.polymtl.ca/course/view.php?id=326
 
 https://nico2che.github.io/polymtl-log4420/
 
-### PW 4
+### (PW 4)[https://github.com/nico2che/polymtl-log4420/tree/tp-4]
 
 Write Node Application :
 
@@ -26,7 +26,7 @@ Write Node Application :
 
 https://polymtl-log4420.herokuapp.com/
 
-### PW 5
+### (PW 5)[https://github.com/nico2che/polymtl-log4420/tree/tp-5]
 
 Write Angular 4 Application :
 
